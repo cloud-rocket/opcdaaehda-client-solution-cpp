@@ -1,0 +1,331 @@
+/*
+ * Copyright (c) 2011-2018 Technosoftware GmbH. All rights reserved
+ * Web: https://technosoftware.com
+ *
+ * Purpose:
+ * OPC DA/AE/HDA Client Ssolution C++ Manual.
+ *
+ * The source code in this file is covered under a dual-license scenario:
+ *   - Owner of a purchased license: SCLA 1.0
+ *   - GPL V3: everybody else
+ *
+ * SCLA license terms accompanied with this source code.
+ * See SCLA 1.0: https://technosoftware.com/license/Source_Code_License_Agreement.pdf
+ *
+ * GNU General Public License as published by the Free Software Foundation;
+ * version 3 of the License are accompanied with this source code.
+ * See https://technosoftware.com/license/GPLv3License.txt
+ *
+ * This source code is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+  
+/*! \page starting_with_da Getting started with OPC DA
+
+\addindex starting_with_da
+\tableofcontents
+
+<p>The getting started lessons provide sample code for the most common use cases.</p>
+<ul>
+  <li>Lesson 1: Create project</li>
+  <li>Lesson 2: Connect</li>
+  <li>Lesson 3: Browse address space</li>
+  <li>Lesson 4: Create Group, Use data changes</li>
+</ul>
+<p>The following lists give an overview on the learning targets covered by each lesson.</p>
+<h2>Lesson 1: Create project</h2>
+<ul>
+  <li>Create a project for developing an OPC DA client using the OPC DA/AE/HDA Client Ssolution C++</li>
+</ul>
+<h2>Lesson 2: Connect</h2>
+<ul>
+  <li>Connect/Disconnect connection to the server using DaServer.Connect(), DaServer.Disconnect()</li>
+</ul>
+<h2>Lesson 3: Browse address space</h2>
+<ul>
+  <li>Browse for nodes in the address space using DaBrowser</li>
+</ul>
+<h2>Lesson 4: Create Group, Use data changes</h2>
+<ul>
+  <li>Get to know the classes DaGroup, DaIDataCallback</li>
+  <li>Create/delete a group using new DaGroup(), delete DaGroup()</li>
+  <li>add items to a group using DaGroup.AddItems()</li>
+  <li>receive cyclic DataChange notifications via DaGroup.SetDataSubscription()</li>
+</ul>
+\section lession_1_da Lesson 1: Create project
+<table cellspacing="0" width="100%">
+  <tr>
+    <th valign="top" align="left" width="15%">Step
+      </td>
+    <th valign="top" align="left" width="75%">Description
+      </td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Create a project</td>
+    <td valign="top" width="96%">It is recommended to use one of the sample projects as a new application project. If you do not use one of the sample applications see the steps below.</td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Include</td>
+    <td valign="top" width="75%">Add the <strong>include</strong> and <strong>.\\include\\DaAeHdaClient</strong> directories of your OPC DA/AE/HDA Client Ssolution C++ installation as additional include directory to the include path of your compiler settings.<br />
+      (Compiler option /I or use project properties config dialog: C/C++ - General - Additional Include Directories)</td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Library Path</td>
+    <td valign="top" width="75%">Add the library directory (.\\lib\\$(Platform)\\$(Configuration)\) of your OPC DA/AE/HDA Client Ssolution C++ installation as additional library directory to the library search path of your linker settings. The directory to be added depends on the used compiler.<br />
+      (Linker option /LIBPATH or use project properties config dialog: Linker - General - Additional Library Directories)</td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Library</td>
+    <td valign="top" width="75%">Add OPC DA/AE/HDA Client Ssolution C++ library to the linker.<br />
+      (Library name as additional linker argument or use project properties config dialog: Linker - Input - Additional Dependencies)<br />
+      Add TechnosoftwareDaAeHdaClient.lib.<br /></td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Header Files</td>
+    <td valign="top" width="75%">Include the header file OpcClientSdk.h into each source file which needs to have access to OPC DA, OPC AE or OPC HDA Servers via the OPC DA/AE/HDA Client Ssolution C++.</td>
+  </tr>
+</table>
+\section lession_2_da Lesson 2: Connect
+<p>Add the following code to your application source:</p>
+\code
+    try {
+        Technosoftware::Base::Status                status;
+        Technosoftware::DaAeHdaClient::DaServer     myDaServer;
+        string                                  serverName("Technosoftware.DaSample");
+        string                                  ipAddress("localhost");
+
+        status = myDaServer.Connect(serverName, ipAddress);
+        if (status.IsNotGood()) {
+            cout << "Cannot connect: " << status.ToString() << endl;
+            return 1;
+        }
+		
+        myDaServer.Disconnect();
+	}
+    catch (Technosoftware::Base::StatusException e) {
+        cout << "Error occured: " << e.GetStatus().ToString() << endl;
+    }
+    catch (Technosoftware::Base::Exception e) {
+        cout << "Error occured: " << e.GetDisplayText() << endl;
+    }
+    catch (std::bad_alloc) {
+        cout << "Error occured: Ran out of memory" << endl;
+    }
+    catch (...) {
+        cout << "Error occured" << endl;
+    }
+\endcode
+
+<p>The code snippet above declares a variable to DaServer. This class manages a DA client side application session. It is the main class for connecting to any OPC DA server.</p>
+<p>The DaServer.Connect() method allows you to connect to an OPC DA server on the local machine or a remote system. The code snippet above connects to an OPC DA server called "Technosoftware.DaSample" on the local computer.
+<p>With the DaServer.Disconnect() you can close a connection with the OPC DA Server</p>
+ 
+\section lession_3_da Lesson 3: Browse address space
+
+<p>Add the following code to your application source:</p>
+\code
+    try {
+        Technosoftware::Base::Status                status;
+        Technosoftware::DaAeHdaClient::DaServer     myDaServer;
+        string                                  serverName("Technosoftware.DaSample");
+        string                                  ipAddress("localhost");
+
+        status = myDaServer.Connect(serverName, ipAddress);
+        if (status.IsNotGood()) {
+            cout << "Cannot connect: " << status.ToString() << endl;
+            return 1;
+        }
+
+		// Browse address space ----------------------------------------------------
+        DaBrowseFilters daBrowseFilters(
+            All, "", "", 0,         // Default filters
+            true,                   // Return all properties
+            true);                  // Return property vlaues
+
+        DaBrowser* daBrowser = new DaBrowser(&myDaServer, &daBrowseFilters);
+        if (!daBrowser) throw std::bad_alloc();    // Whether this test is necessary depends on the used compiler options
+
+        // Get the item properties of a specific item
+        DaItemProperties& properties = daBrowser->GetProperties("SpecialItems.WithAnalogEUInfo");
+        ShowProperties(properties, 1);
+
+        status = daBrowser->Browse("");             // Start browsing at root
+        if (status.IsNotGood()) {
+            cout << "   Cannot browse the Server Address Space: " << status.ToString() << endl;
+            return 1;
+        }
+        DaBrowseElements  els = daBrowser->GetElements();
+
+        if (ShowElements(daBrowser)) {           // Show the element names and browse all branches
+            cout << endl
+                << "   Server Address Space displayed, press <Enter> to" << endl
+                << "   disconnect from the server.";
+            cin.get();
+        }
+        delete daBrowser;	
+		// Browse address space ----------------------------------------------------
+
+        myDaServer.Disconnect();
+	}
+    catch (Technosoftware::Base::StatusException e) {
+        cout << "Error occured: " << e.GetStatus().ToString() << endl;
+    }
+    catch (Technosoftware::Base::Exception e) {
+        cout << "Error occured: " << e.GetDisplayText() << endl;
+    }
+    catch (std::bad_alloc) {
+        cout << "Error occured: Ran out of memory" << endl;
+    }
+    catch (...) {
+        cout << "Error occured" << endl;
+    }
+\endcode
+
+<p>The code snippet above declares a variable to DaBrowseFilters. With this you specify the filters to be applied to a browse, e.g. returning all nodes with all properties</p>
+<p>You then create a new DaBrowser() and specifies the DaServer and DaBrowseFilters to use. A browse of the address space is started with the DaBrowser.Browse() method. The elements found during browse are available via DaBrowser.Elements().</p>
+<p>The example DaBrowserConsole shows how to browse the address space recursively.</p>
+
+\section lession_4_da Lesson 4: Create Group, Use data changes
+
+<p>Add the following code to your application source:</p>
+\code
+    try {
+        Technosoftware::Base::Status                status;
+        Technosoftware::DaAeHdaClient::DaServer     myDaServer;
+        string                                  serverName("Technosoftware.DaSample");
+        string                                  ipAddress("localhost");
+
+        status = myDaServer.Connect(serverName, ipAddress);
+        if (status.IsNotGood()) {
+            cout << "Cannot connect: " << status.ToString() << endl;
+            return 1;
+        }
+				
+		// Create Group, Read and Write Values -------------------------------------
+		
+		/* 1. Create group */
+        DaGroup* daGroup = new DaGroup(&myDaServer, "OPC TestGroup", true, 1000);  // active, refresh rate 1s
+        if (!daGroup) {
+            cout << "   Cannot create group." << endl;
+            return 1;
+        }
+
+		/* 2. Add items to group */
+        vector<Technosoftware::DaAeHdaClient::DaItem*>      addedItems;
+        Technosoftware::DaAeHdaClient::DaItemDefinitions    daItemDefinitions;
+
+        status = daItemDefinitions.Add("CTT.SimpleTypes.InOut.Integer", 100);
+        if (status.IsGood()) {
+            status = daItemDefinitions.Add("SimulatedData.Random", 150);
+        }
+        if (status.IsNotGood()) {
+            cout << "   Cannot add item definition to the item definition list: " << status.ToString() << endl;
+            return 1;
+        }
+        status = daGroup->AddItems(daItemDefinitions, addedItems, AddItemErrHandler);
+        if (!status.IsGood()) {
+            cout << "   Cannot add all items: " << status.ToString() << endl;
+            return 1;
+        }
+
+		/* 3. Activate data subscription */
+        status = daGroup->SetDataSubscription(&myDataCallback);
+        if (status.IsNotGood()) {
+            cout << "   Cannot set data subscription: " << res.ToString() << endl;
+            return 1;
+        }
+
+		/* 4. Deactivate data subscription */
+        status = daGroup->SetDataSubscription(NULL);
+
+        delete daGroup;
+		// Create Group, Read and Write Values -------------------------------------
+
+		myDaServer.Disconnect();
+	}
+    catch (Technosoftware::Base::StatusException e) {
+        cout << "Error occured: " << e.GetStatus().ToString() << endl;
+    }
+    catch (Technosoftware::Base::Exception e) {
+        cout << "Error occured: " << e.GetDisplayText() << endl;
+    }
+    catch (std::bad_alloc) {
+        cout << "Error occured: Ran out of memory" << endl;
+    }
+    catch (...) {
+        cout << "Error occured" << endl;
+    }
+\endcode
+
+<p>The code snippet above shows the base usage of a group. How to create a group (1.), add items to a group (2.), activate a data subscription (3.) and deactivate a data subscription (4.)..</p>
+<p>The example DaConsole shows in more detail on how to use a group. The code below shows an implementation of the data change callback.</p>
+
+\code
+class MyDataCallbackClass : public Technosoftware::DaAeHdaClient::DaIDataCallback
+{
+public:
+    // Called by the DaFramwork
+    void DataChange(uint32_t                                    transactionId,
+        Technosoftware::DaAeHdaClient::DaGroup*                     groupHandle,
+        bool                                                    allQualitiesGood,
+        bool                                                    allResultsOk,
+        uint32_t                                                numberOfItems,
+        Technosoftware::DaAeHdaClient::DaItem**                     items);
+
+    void ReadComplete(uint32_t                                  transactionId,
+        Technosoftware::DaAeHdaClient::DaGroup*                     groupHandle,
+        bool                                                    allQualitiesGood,
+        bool                                                    allResultsOk,
+        uint32_t                                                numberOfItems,
+        Technosoftware::DaAeHdaClient::DaItem**                     items)
+    {}                      // not used by this sample application
+
+    void WriteComplete(uint32_t                                 transactionId,
+        Technosoftware::DaAeHdaClient::DaGroup*                     groupHandle,
+        bool                                                    allResultsOk,
+        uint32_t                                                numberOfItems,
+        Technosoftware::DaAeHdaClient::DaItem**                     items)
+    {}                      // not used by this sample application
+
+    void CancelComplete(uint32_t    						    dwTransactionID,
+        Technosoftware::DaAeHdaClient::DaGroup*                     groupHandle)
+    {}                      // not used by this sample application
+};
+
+void MyDataCallbackClass::DataChange(
+    uint32_t                                                    transactionId,
+    Technosoftware::DaAeHdaClient::DaGroup*                         groupHandle,
+    bool                                                        allQualitiesGood,
+    bool                                                        allResultsOk,
+    uint32_t                                                    numberOfItems,
+    Technosoftware::DaAeHdaClient::DaItem**                         items)
+{
+    cout << "DataChange():" << endl
+        << "Transaction ID: " << transactionId << endl
+        << "All Qualities Good ? " << (allQualitiesGood ? "yes" : "no") << endl
+        << "All Results Ok ? " << (numberOfItems ? "yes" : "no") << endl;
+
+    Technosoftware::DaAeHdaClient::DaItem* pItem;
+    while (numberOfItems--) {
+        pItem = items[numberOfItems];
+        cout << endl << "Client Handle : " << pItem->GetClientHandle() << endl;
+        if (pItem->GetReadAsyncResult().GetResult().IsGood()) {
+            cout << "Value         : " << V_I4(pItem->GetReadAsyncResult().GetValue()) << endl;
+            cout << "Time Stamp    : " << DateTimeFormatter::Format(pItem->GetReadAsyncResult().GetTimeStamp(), DateTimeFormat::ISO8601_FORMAT) << endl;
+            cout << "Quality       : " << pItem->GetReadAsyncResult().GetQualityAsText() << endl;
+        }
+        else {
+            Technosoftware::Base::Status hresult = pItem->GetReadAsyncResult().GetResult();
+            cout << "Result        : " << hresult.ToString() << endl;
+        }
+    }
+    cout << endl << endl;
+}
+}\endcode
+
+\htmlonly
+  Go to the <a href="starting_with_ae.html">next</a> section or return to the <a href="index.html">index</a>.
+\endhtmlonly
+  
+  */ 

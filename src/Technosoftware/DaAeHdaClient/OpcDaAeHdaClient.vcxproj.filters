@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{39aaceea-0fe0-4776-b304-ac18f0b58da5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{69a10953-4b76-4d05-acc8-a5afcb078d46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Da">
+      <UniqueIdentifier>{67cb9029-ffca-4417-8aa1-2e77d2498557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Ae">
+      <UniqueIdentifier>{560b4791-38c7-408a-a778-9a6b293f94d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hda">
+      <UniqueIdentifier>{5bb192f8-3a07-4273-bc90-7894ad0bcdf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Da">
+      <UniqueIdentifier>{5784139e-ea8f-4a24-adf2-80d5267e51fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Ae">
+      <UniqueIdentifier>{66151c05-e908-415c-b76e-da736d28a0ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Hda">
+      <UniqueIdentifier>{6dd2fe09-929d-4b2f-aa1e-1a3360463b03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base">
+      <UniqueIdentifier>{41fbfac9-8d27-4bf7-a80c-29ec2cead904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base">
+      <UniqueIdentifier>{c2eee535-064c-49cb-b844-dafc4f62a54f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Core">
+      <UniqueIdentifier>{ed32714c-b93e-45b1-8a32-84ac0ce08b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\DateTime">
+      <UniqueIdentifier>{39bf0ab6-2b17-4531-a427-7064fcb9e54e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Text">
+      <UniqueIdentifier>{66b53a24-d1e9-4a31-b2f6-6efe0cee9ed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Threading">
+      <UniqueIdentifier>{9d1abecd-ab54-4ac9-a120-9f96f5c13d48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Core">
+      <UniqueIdentifier>{5859bd63-a45c-422d-a5fa-ee341fe22c4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\DateTime">
+      <UniqueIdentifier>{145d42be-1fe5-4a94-993a-1180733d1e58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Text">
+      <UniqueIdentifier>{669de5d5-811a-41f5-a1d6-cb8d406b6f67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Threading">
+      <UniqueIdentifier>{2a6fa6f0-ebe9-4dda-8cab-5933b7d164e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Streams">
+      <UniqueIdentifier>{576512c7-a92f-40b9-b66d-1a31a8deaf85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Streams">
+      <UniqueIdentifier>{02499170-9d11-4173-93b9-02e76dafad7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\OPC">
+      <UniqueIdentifier>{441070c2-cba9-4bac-a20b-78e9226569a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\OPC">
+      <UniqueIdentifier>{b05eaed9-61d9-474a-a521-3c0152f93f0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Hashing">
+      <UniqueIdentifier>{df5bfe4e-07bc-4e60-88e4-b2420a249bce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Hashing">
+      <UniqueIdentifier>{f44d464a-859d-45d4-9acb-a91f2bb06e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Base\Logging">
+      <UniqueIdentifier>{f01b5522-7000-4ed2-83a6-a5a7f9c0d558}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Base\Logging">
+      <UniqueIdentifier>{01c90714-b370-4077-b3c4-d0a0c671a221}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="system\ClientSdk_i.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcAccess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Da\DaBrowser.cpp">
+      <Filter>Source Files\Da</Filter>
+    </ClCompile>
+    <ClCompile Include="Da\DaCommon.cpp">
+      <Filter>Source Files\Da</Filter>
+    </ClCompile>
+    <ClCompile Include="Da\DaGroup.cpp">
+      <Filter>Source Files\Da</Filter>
+    </ClCompile>
+    <ClCompile Include="Da\DaItem.cpp">
+      <Filter>Source Files\Da</Filter>
+    </ClCompile>
+    <ClCompile Include="Da\DaItemProperty.cpp">
+      <Filter>Source Files\Da</Filter>
+    </ClCompile>
+    <ClCompile Include="Da\DaServer.cpp">
+      <Filter>Source Files\Da</Filter>
+    </ClCompile>
+    <ClCompile Include="Da\DaServerStatus.cpp">
+      <Filter>Source Files\Da</Filter>
+    </ClCompile>
+    <ClCompile Include="Da\MatchPattern.cpp">
+      <Filter>Source Files\Da</Filter>
+    </ClCompile>
+    <ClCompile Include="Ae\AeEvent.cpp">
+      <Filter>Source Files\Ae</Filter>
+    </ClCompile>
+    <ClCompile Include="Ae\AeEventSinkImpl.cpp">
+      <Filter>Source Files\Ae</Filter>
+    </ClCompile>
+    <ClCompile Include="Ae\AeServer.cpp">
+      <Filter>Source Files\Ae</Filter>
+    </ClCompile>
+    <ClCompile Include="Ae\AeServerStatus.cpp">
+      <Filter>Source Files\Ae</Filter>
+    </ClCompile>
+    <ClCompile Include="Ae\AeSubscription.cpp">
+      <Filter>Source Files\Ae</Filter>
+    </ClCompile>
+    <ClCompile Include="Hda\HdaServer.cpp">
+      <Filter>Source Files\Hda</Filter>
+    </ClCompile>
+    <ClCompile Include="Hda\HdaServerStatus.cpp">
+      <Filter>Source Files\Hda</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcUti.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Ascii.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\AtomicCounter.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Bugcheck.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\ByteOrder.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\DateTime.cpp">
+      <Filter>Source Files\Base\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\DateTimeFormat.cpp">
+      <Filter>Source Files\Base\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\DateTimeFormatter.cpp">
+      <Filter>Source Files\Base\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\DateTimeParser.cpp">
+      <Filter>Source Files\Base\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Debugger.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Exception.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\FPEnvironment.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\LocalDateTime.cpp">
+      <Filter>Source Files\Base\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\ASCIIEncoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Latin1Encoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Latin2Encoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Latin9Encoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Windows1252Encoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\UnicodeConverter.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\UTF8Encoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\UTF16Encoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\UTF32Encoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Windows1250Encoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Windows1251Encoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\TextConverter.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\TextEncoding.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\TextIterator.cpp">
+      <Filter>Source Files\Base\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Timespan.cpp">
+      <Filter>Source Files\Base\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Timestamp.cpp">
+      <Filter>Source Files\Base\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Timezone.cpp">
+      <Filter>Source Files\Base\DateTime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\NumericString.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\NumberFormatter.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Mutex.cpp">
+      <Filter>Source Files\Base\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\RWLock.cpp">
+      <Filter>Source Files\Base\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\MemoryStream.cpp">
+      <Filter>Source Files\Base\Streams</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\String.cpp">
+      <Filter>Source Files\Base\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Status.cpp">
+      <Filter>Source Files\Base\OPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\StatusCodes.cpp">
+      <Filter>Source Files\Base\OPC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Hash.cpp">
+      <Filter>Source Files\Base\Hashing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\HashStatistic.cpp">
+      <Filter>Source Files\Base\Hashing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\ServerStates.cpp">
+      <Filter>Source Files\Base\OPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Hda\HdaAggregate.cpp">
+      <Filter>Source Files\Hda</Filter>
+    </ClCompile>
+    <ClCompile Include="Hda\HdaItemAttribute.cpp">
+      <Filter>Source Files\Hda</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Base\Logger.cpp">
+      <Filter>Source Files\Base\Logging</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Ae\AeEvent.h">
+      <Filter>Header Files\Ae</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Ae\AeServer.h">
+      <Filter>Header Files\Ae</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Ae\AeServerStatus.h">
+      <Filter>Header Files\Ae</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Ae\AeSubscription.h">
+      <Filter>Header Files\Ae</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaBrowser.h">
+      <Filter>Header Files\Da</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaCommon.h">
+      <Filter>Header Files\Da</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaGroup.h">
+      <Filter>Header Files\Da</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaItem.h">
+      <Filter>Header Files\Da</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaItemProperty.h">
+      <Filter>Header Files\Da</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaServer.h">
+      <Filter>Header Files\Da</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaServerStatus.h">
+      <Filter>Header Files\Da</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaItem.h">
+      <Filter>Header Files\Hda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaServer.h">
+      <Filter>Header Files\Hda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaServerStatus.h">
+      <Filter>Header Files\Hda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\ClientBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\OpcBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\OpcClientSdk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Alignment.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Ascii.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\AtomicCounter.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\AutoPtr.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Base.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Buffer.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Bugcheck.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\ByteOrder.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Config.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\DateTime.h">
+      <Filter>Header Files\Base\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\DateTimeFormat.h">
+      <Filter>Header Files\Base\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\DateTimeFormatter.h">
+      <Filter>Header Files\Base\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\DateTimeParser.h">
+      <Filter>Header Files\Base\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Debugger.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Exception.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\FPEnvironment.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Platform.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\SharedPtr.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\SingletonHolder.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\String.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Timespan.h">
+      <Filter>Header Files\Base\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Timestamp.h">
+      <Filter>Header Files\Base\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Timezone.h">
+      <Filter>Header Files\Base\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\TextConverter.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\TextEncoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\TextIterator.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\UnicodeConverter.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\UTF8Encoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\UTF16Encoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\UTF32Encoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\UTFString.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Windows1250Encoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Windows1251Encoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Windows1252Encoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\ASCIIEncoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Latin1Encoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Latin2Encoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Latin9Encoding.h">
+      <Filter>Header Files\Base\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\LocalDateTime.h">
+      <Filter>Header Files\Base\DateTime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\StreamUtil.h">
+      <Filter>Header Files\Base\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\NumberFormatter.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\NumericString.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\MemoryStream.h">
+      <Filter>Header Files\Base\Streams</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Mutex.h">
+      <Filter>Header Files\Base\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\RWLock.h">
+      <Filter>Header Files\Base\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\ScopedLock.h">
+      <Filter>Header Files\Base\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\ScopedUnlock.h">
+      <Filter>Header Files\Base\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Handles.h">
+      <Filter>Header Files\Base\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Status.h">
+      <Filter>Header Files\Base\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\StatusCodes.h">
+      <Filter>Header Files\Base\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Hash.h">
+      <Filter>Header Files\Base\Hashing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\HashMap.h">
+      <Filter>Header Files\Base\Hashing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\HashSet.h">
+      <Filter>Header Files\Base\Hashing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\HashStatistic.h">
+      <Filter>Header Files\Base\Hashing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\LinearHashTable.h">
+      <Filter>Header Files\Base\Hashing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Array.h">
+      <Filter>Header Files\Base\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\ServerStates.h">
+      <Filter>Header Files\Base\OPC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Classic\classicopc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaAggregateId.h">
+      <Filter>Header Files\Hda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaAggregate.h">
+      <Filter>Header Files\Hda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaItemAttribute.h">
+      <Filter>Header Files\Hda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaItemAttributeId.h">
+      <Filter>Header Files\Hda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Base\Logger.h">
+      <Filter>Header Files\Base\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="OpcUti.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

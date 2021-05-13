@@ -1,0 +1,218 @@
+/*
+ * Copyright (c) 2011-2018 Technosoftware GmbH. All rights reserved
+ * Web: https://technosoftware.com
+ *
+ * Purpose:
+ * OPC DA/AE/HDA Client Ssolution C++ Manual.
+ *
+ * The source code in this file is covered under a dual-license scenario:
+ *   - Owner of a purchased license: SCLA 1.0
+ *   - GPL V3: everybody else
+ *
+ * SCLA license terms accompanied with this source code.
+ * See SCLA 1.0: https://technosoftware.com/license/Source_Code_License_Agreement.pdf
+ *
+ * GNU General Public License as published by the Free Software Foundation;
+ * version 3 of the License are accompanied with this source code.
+ * See https://technosoftware.com/license/GPLv3License.txt
+ *
+ * This source code is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/*! \page starting_with_ae Getting started with OPC AE
+
+\addindex starting_with_ae
+\tableofcontents
+
+<p>The getting started lessons provide sample code for the most common use cases.</p>
+<ul>
+  <li>Lesson 1: Create project</li>
+  <li>Lesson 2: Connect</li>
+  <li>Lesson 3: Create a Subscription, Use simple alarms&events</li>
+</ul>
+<p>The following lists give an overview on the learning targets covered by each lesson.</p>
+<h2>Lesson 1: Create project</h2>
+<ul>
+  <li>Create a project for developing an OPC AE client using the OPC CLient SDK C++</li>
+</ul>
+<h2>Lesson 2: Connect</h2>
+<ul>
+  <li>Connect/Disconnect connection to the server using AeServer.Connect(), AeServer.Disconnect()</li>
+</ul>
+<h2>Lesson 3: Create a Subscription, Use simple alarms&events</h2>
+<ul>
+  <li>Get to know the classes AeSubscription, AeIEventSink</li>
+  <li>receive event notifications</li>
+</ul>
+\section lession_1_ae Lesson 1: Create project
+<table cellspacing="0" width="100%">
+  <tr>
+    <th valign="top" align="left" width="15%">Step
+      </td>
+    <th valign="top" align="left" width="75%">Description
+      </td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Create a project</td>
+    <td valign="top" width="96%">It is recommended to use one of the sample projects as a new application project. If you do not use one of the sample applications see the steps below.</td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Include</td>
+    <td valign="top" width="75%">Add the <strong>include</strong> and <strong>.\\include\\DaAeHdaClient</strong> directories of your OPC DA/AE/HDA Client Ssolution C++ installation as additional include directory to the include path of your compiler settings.<br />
+      (Compiler option /I or use project properties config dialog: C/C++ - General - Additional Include Directories)</td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Library Path</td>
+    <td valign="top" width="75%">Add the library directory (.\\lib\\$(Platform)\\$(Configuration)\) of your OPC DA/AE/HDA Client Ssolution C++ installation as additional library directory to the library search path of your linker settings. The directory to be added depends on the used compiler.<br />
+      (Linker option /LIBPATH or use project properties config dialog: Linker - General - Additional Library Directories)</td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Library</td>
+    <td valign="top" width="75%">Add OPC DA/AE/HDA Client Ssolution C++ library to the linker.<br />
+      (Library name as additional linker argument or use project properties config dialog: Linker - Input - Additional Dependencies)<br />
+      Add TechnosoftwareDaAeHdaClient.lib.<br /></td>
+  </tr>
+  <tr>
+    <td valign="top" width="15%">Header Files</td>
+    <td valign="top" width="75%">Include the header file OpcClientSdk.h into each source file which needs to have access to OPC DA, OPC AE or OPC HDA Servers via the Unified Client SDK C++.</td>
+  </tr>
+</table>
+\section lession_2_ae Lesson 2: Connect
+<p>Add the following code to your application source:</p>
+\code
+    try {
+        Technosoftware::Base::Status                status;
+        Technosoftware::DaAeHdaClient::AeServer     myAeServer;
+        string                                  serverName("Technosoftware.AeSample");
+        string                                  ipAddress("localhost");
+
+        status = myAeServer.Connect(serverName, ipAddress);
+        if (status.IsNotGood()) {
+            cout << "Cannot connect: " << status.ToString() << endl;
+            return 1;
+        }
+		
+		myAeServer.Disconnect();
+	}
+    catch (Technosoftware::Base::StatusException e) {
+        cout << "Error occured: " << e.GetStatus().ToString() << endl;
+    }
+    catch (Technosoftware::Base::Exception e) {
+        cout << "Error occured: " << e.GetDisplayText() << endl;
+    }
+    catch (std::bad_alloc) {
+        cout << "Error occured: Ran out of memory" << endl;
+    }
+    catch (...) {
+        cout << "Error occured" << endl;
+    }
+\endcode
+
+<p>The code snippet above declares a variable to AeServer. This class manages a AE client side application session. It is the main class for connecting to any OPC AE server.</p>
+<p>The AeServer.Connect() method allows you to connect to an OPC AE server on the local machine or a remote system. The code snippet above connects to an OPC AE server called "Technosoftware.AeSample" on the system with the name "nameOrIp".
+<p>With the AeServer.Disconnect() you can close a connection with the OPC AE Server</p>
+ 
+\section lession_3_ae Lesson 3: Create a Subscription, Use simple alarms&events
+
+<p>Add the following code to your application source:</p>
+\code
+    try {
+        Technosoftware::Base::Status                status;
+        Technosoftware::DaAeHdaClient::AeServer     myAeServer;
+        MyEventCallbackClass                    myEventCallback;
+        string                                  serverName("Technosoftware.AeSample");
+        string                                  ipAddress("localhost");
+
+        status = myAeServer.Connect(serverName, ipAddress);
+        if (status.IsNotGood()) {
+            cout << "Cannot connect: " << status.ToString() << endl;
+            return 1;
+        }
+				
+		// Create a Subscription -------------------------------------
+		
+		/* 1. Create a Subscription */
+		AeSubscription*       aeSubscription = new AeSubscription( &myAeServer, &myEventCallback, 0x55 );  
+		if (!pGroup) throw std::bad_alloc();    	// Whether this test is necessary 
+													// depends on the used compiler options
+
+		/* 2. Activate event subscription */
+		res = aeSubscription->SetActive();
+		if (res.IsError()) {
+			cout << "   Cannot activate the Event Subscription: " << res << endl;
+			return 1;
+		}
+
+		/* 3. Deactivate event subscription */
+		res = aeSubscription->SetActive( false );
+
+		/* 4. Delete event subscription */
+		delete aeSubscription;
+
+		/* 5. Disconnect from OPC AE server */
+		myAeServer.Disconnect();
+	}
+    catch (Technosoftware::Base::StatusException e) {
+        cout << "Error occured: " << e.GetStatus().ToString() << endl;
+    }
+    catch (Technosoftware::Base::Exception e) {
+        cout << "Error occured: " << e.GetDisplayText() << endl;
+    }
+    catch (std::bad_alloc) {
+        cout << "Error occured: Ran out of memory" << endl;
+    }
+    catch (...) {
+        cout << "Error occured" << endl;
+    }
+\endcode
+
+<p>The code snippet above shows the base usage of an event subscription. How to create a Subscription (1.), activate event subscription (2.), deactivate event subscription (3.), delete event subscription (4.) and disconnect from OPC AE server (5.)..</p>
+<p>The example AeSample shows in more detail on how to use an event subscription. The code below shows an implementation of the event change callback.</p>
+
+\code
+class MyEventCallbackClass : public AeIEventSink
+{
+    // Construction / Destruction
+public:
+    MyEventCallbackClass(CClassicAeSampleDoc* pDoc) : m_pDoc(pDoc) {};
+    ~MyEventCallbackClass() {}
+
+    // Operations
+public:
+    inline CClassicAeSampleDoc* GetDocument() const { return m_pDoc; }
+    // Called by the AeFramwork
+    void NewEvents(AeNewEvents* pNewEvents);
+
+    // Implementation
+protected:
+    CClassicAeSampleDoc* m_pDoc;
+};
+
+void MyEventCallbackClass::NewEvents( AeNewEvents* newEvents )
+{
+   CClassicAeSampleDoc* pDoc = GetDocument();
+   _ASSERTE( pDoc );
+
+   AeEvent* pEvent;
+   while (pEvent = newEvents->DetachEvent()) {
+      WPARAM   wViewCount = 0;                  // Specifies the View Type: 0 Current Events View, 1 History Events View
+      POSITION pos = pDoc->GetFirstViewPosition();
+      while (pos != NULL) {
+         CView* pView = pDoc->GetNextView(pos);
+         if (pView) {
+            pView->SendMessage( WM_DISPLAY_EVENT, wViewCount++, (LPARAM)pEvent );
+         }
+      }
+      delete pEvent;
+   }
+   delete newEvents;
+}
+\endcode
+
+\htmlonly
+  Go to the <a href="starting_with_hda.html">next</a> section or return to the <a href="index.html">index</a>.
+\endhtmlonly
+  
+  */ 

@@ -1,0 +1,61 @@
+/*
+ * Copyright (c) 2011-2018 Technosoftware GmbH. All rights reserved
+ * Web: https://technosoftware.com
+ *
+ * Purpose:
+ * OPC DA/AE/HDA Client Ssolution C++ Manual.
+ *
+ * The source code in this file is covered under a dual-license scenario:
+ *   - Owner of a purchased license: SCLA 1.0
+ *   - GPL V3: everybody else
+ *
+ * SCLA license terms accompanied with this source code.
+ * See SCLA 1.0: https://technosoftware.com/license/Source_Code_License_Agreement.pdf
+ *
+ * GNU General Public License as published by the Free Software Foundation;
+ * version 3 of the License are accompanied with this source code.
+ * See https://technosoftware.com/license/GPLv3License.txt
+ *
+ * This source code is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+ 
+/*! 
+\mainpage 
+<!--OPC DA/AE/HDA Client Ssolution C++ Manual-->   
+<h2>Introduction</h2>
+<p>The OPC DA/AE/HDA Client Ssolution C++ offers a fast and easy access to the OPC Client technology. Develop OPC DA/AE/HDA compliant Clients with C++ for Windows.</p>
+\image html ClientCPPDevelopment.png
+<p>Under Windows clients using the OPC DA/AE/HDA Client Ssolution C++ supports OPC DA, OPC AE and OPC HDA.</p>
+<p>The OPC DA/AE/HDA Client API defines classes which can be used to implement an OPC client capable to access OPC DA, AE and HDA servers with the same API. These classes manage client side state information; provide higher level abstractions for OPC tasks such as managing sessions and subscriptions or saving and restoring connection information for later use.</p>
+<p>A large set of sample Clients can be used as reference on how to implement different use cases. Supported compiler is Visual Studio 2017.</p>
+<h3>Features:</h3>
+<ul>
+  <li>Clients are fully compliant to OPC DA 2.05 ,OPC DA 3.0, OPC AE 1.10,OPC HDA 1.10 and OPC HDA 1.20 servers.</li>
+  <li>Clients supports partially OPC HDA 1.20 servers.</li>
+  <li>Simplyfies the differences between the specifications by specifiying a unified API. </li>
+  <li>Easy to understand and well documented sample clients show how to use the API.</li>
+  <li>Source of several sample clients included showing different use cases.</li>
+</ul>
+<h3>Requirements:</h3>
+<p>In general Technosoftware GmbH supports all Windows platforms. But actively tested and supported are only the following platforms:</p>
+<ul>
+  <li>Windows 10.0 (32bit and 64bit) - Personal Edition, Developer Edition, Ultimate Edition, Source Edition</li>
+  <li>Windows 7, 8, 8.1 (32bit and 64bit) - Developer Edition, Ultimate Edition, Source Edition</li>
+  <li>Windows Server 2008, Windows Server 2012 (32bit and 64bit) - Ultimate Edition, Source Edition</li>
+  <li>Microsoft Visual Studio 2019 (C++) </li>
+</ul>
+
+Please check our License Agreement at <a href="https://github.com/technosoftware-gmbh/opc-daaehda-client-cpp/LICENSE.md">LICENSE.md</a> for more information
+
+\example DaConsole.cpp
+\example DaBrowserConsole.cpp
+\example HdaConsole.cpp
+
+\htmlonly
+Go to the <a href="deployment.html">next</a> section.
+\endhtmlonly
+
+*/
+

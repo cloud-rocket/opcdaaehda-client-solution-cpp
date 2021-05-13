@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2d0245fd-9b23-4213-92f9-5fa772afefdb}</ProjectGuid>
+    <Keyword>DynamicLibrary</Keyword>
+    <RootNamespace>OpcClientSdk</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <OutDir>$(SolutionDir)$(Platform)\$(PlatformToolset)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>TechnosoftwareDaAeHdaClient</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <GenerateManifest>false</GenerateManifest>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <OutDir>$(SolutionDir)$(Platform)\$(PlatformToolset)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>TechnosoftwareDaAeHdaClient</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <GenerateManifest>false</GenerateManifest>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <OutDir>$(SolutionDir)$(Platform)\$(PlatformToolset)\$(Configuration)\</OutDir>
+    <TargetName>TechnosoftwareDaAeHdaClient</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <GenerateManifest>false</GenerateManifest>
+    <IgnoreImportLibrary>false</IgnoreImportLibrary>
+    <OutDir>$(SolutionDir)$(Platform)\$(PlatformToolset)\$(Configuration)\</OutDir>
+    <TargetName>TechnosoftwareDaAeHdaClient</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PreprocessorDefinitions>_WINDLL;TECHNOSOFTWARE_NO_UNWINDOWS;TECHNOSOFTWARE_LICENSE_CHECK;WIN32;%(PreprocessorDefinitions);OPCCLIENTSDK_EXPORTS;TECHNOSOFTWARE_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\..\..\include;.\system;.\License;..;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level1</WarningLevel>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <AdditionalLibraryDirectories>..\..\..\lib\$(Platform)\$(PlatformToolset)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>TECHNOSOFTWARE_WIN32;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PreprocessorDefinitions>_WINDLL;TECHNOSOFTWARE_NO_UNWINDOWS;TECHNOSOFTWARE_LICENSE_CHECK;WIN32;%(PreprocessorDefinitions);OPCCLIENTSDK_EXPORTS;TECHNOSOFTWARE_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\..\..\include;.\system;.\License;..;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level1</WarningLevel>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <AdditionalLibraryDirectories>..\..\..\lib\$(Platform)\$(PlatformToolset)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>TECHNOSOFTWARE_WIN32;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PreprocessorDefinitions>_WINDLL;TECHNOSOFTWARE_NO_UNWINDOWS;TECHNOSOFTWARE_LICENSE_CHECK;WIN64;_WIN64;%(PreprocessorDefinitions);OPCCLIENTSDK_EXPORTS;TECHNOSOFTWARE_EXPORTS;_OPC_DA_SUPPORTED;_OPC_AE_SUPPORTED;_OPC_HDA_SUPPORTED</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\..\..\include;.\system;.\License;..;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level1</WarningLevel>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <AdditionalLibraryDirectories>..\..\..\lib\$(Platform)\$(PlatformToolset)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>TECHNOSOFTWARE_WIN64;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <PreprocessorDefinitions>_WINDLL;TECHNOSOFTWARE_NO_UNWINDOWS;TECHNOSOFTWARE_LICENSE_CHECK;WIN64;_WIN64;%(PreprocessorDefinitions);OPCCLIENTSDK_EXPORTS;TECHNOSOFTWARE_EXPORTS;_OPC_DA_SUPPORTED;_OPC_AE_SUPPORTED;_OPC_HDA_SUPPORTED</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;..\..\..\include;.\system;.\License;..;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level1</WarningLevel>
+      <LanguageStandard>stdcpp14</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <AdditionalLibraryDirectories>..\..\..\lib\$(Platform)\$(PlatformToolset)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions>TECHNOSOFTWARE_WIN64;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\Base\Alignment.h" />
+    <ClInclude Include="..\..\..\include\Base\Array.h" />
+    <ClInclude Include="..\..\..\include\Base\Ascii.h" />
+    <ClInclude Include="..\..\..\include\Base\ASCIIEncoding.h" />
+    <ClInclude Include="..\..\..\include\Base\AtomicCounter.h" />
+    <ClInclude Include="..\..\..\include\Base\AutoPtr.h" />
+    <ClInclude Include="..\..\..\include\Base\Base.h" />
+    <ClInclude Include="..\..\..\include\Base\Buffer.h" />
+    <ClInclude Include="..\..\..\include\Base\Bugcheck.h" />
+    <ClInclude Include="..\..\..\include\Base\ByteOrder.h" />
+    <ClInclude Include="..\..\..\include\Base\Config.h" />
+    <ClInclude Include="..\..\..\include\Base\DateTime.h" />
+    <ClInclude Include="..\..\..\include\Base\DateTimeFormat.h" />
+    <ClInclude Include="..\..\..\include\Base\DateTimeFormatter.h" />
+    <ClInclude Include="..\..\..\include\Base\DateTimeParser.h" />
+    <ClInclude Include="..\..\..\include\Base\Debugger.h" />
+    <ClInclude Include="..\..\..\include\Base\Exception.h" />
+    <ClInclude Include="..\..\..\include\Base\FPEnvironment.h" />
+    <ClInclude Include="..\..\..\include\Base\Handles.h" />
+    <ClInclude Include="..\..\..\include\Base\Hash.h" />
+    <ClInclude Include="..\..\..\include\Base\HashMap.h" />
+    <ClInclude Include="..\..\..\include\Base\HashSet.h" />
+    <ClInclude Include="..\..\..\include\Base\HashStatistic.h" />
+    <ClInclude Include="..\..\..\include\Base\Latin1Encoding.h" />
+    <ClInclude Include="..\..\..\include\Base\Latin2Encoding.h" />
+    <ClInclude Include="..\..\..\include\Base\Latin9Encoding.h" />
+    <ClInclude Include="..\..\..\include\Base\LinearHashTable.h" />
+    <ClInclude Include="..\..\..\include\Base\LocalDateTime.h" />
+    <ClInclude Include="..\..\..\include\Base\Logger.h" />
+    <ClInclude Include="..\..\..\include\Base\MemoryStream.h" />
+    <ClInclude Include="..\..\..\include\Base\Mutex.h" />
+    <ClInclude Include="..\..\..\include\Base\NumberFormatter.h" />
+    <ClInclude Include="..\..\..\include\Base\NumericString.h" />
+    <ClInclude Include="..\..\..\include\Base\Platform.h" />
+    <ClInclude Include="..\..\..\include\Base\RWLock.h" />
+    <ClInclude Include="..\..\..\include\Base\ScopedLock.h" />
+    <ClInclude Include="..\..\..\include\Base\ScopedUnlock.h" />
+    <ClInclude Include="..\..\..\include\Base\ServerStates.h" />
+    <ClInclude Include="..\..\..\include\Base\SharedPtr.h" />
+    <ClInclude Include="..\..\..\include\Base\SingletonHolder.h" />
+    <ClInclude Include="..\..\..\include\Base\Status.h" />
+    <ClInclude Include="..\..\..\include\Base\StatusCodes.h" />
+    <ClInclude Include="..\..\..\include\Base\StreamUtil.h" />
+    <ClInclude Include="..\..\..\include\Base\String.h" />
+    <ClInclude Include="..\..\..\include\Base\TextConverter.h" />
+    <ClInclude Include="..\..\..\include\Base\TextEncoding.h" />
+    <ClInclude Include="..\..\..\include\Base\TextIterator.h" />
+    <ClInclude Include="..\..\..\include\Base\Timespan.h" />
+    <ClInclude Include="..\..\..\include\Base\Timestamp.h" />
+    <ClInclude Include="..\..\..\include\Base\Timezone.h" />
+    <ClInclude Include="..\..\..\include\Base\UnicodeConverter.h" />
+    <ClInclude Include="..\..\..\include\Base\UTF16Encoding.h" />
+    <ClInclude Include="..\..\..\include\Base\UTF32Encoding.h" />
+    <ClInclude Include="..\..\..\include\Base\UTF8Encoding.h" />
+    <ClInclude Include="..\..\..\include\Base\UTFString.h" />
+    <ClInclude Include="..\..\..\include\Base\Windows1250Encoding.h" />
+    <ClInclude Include="..\..\..\include\Base\Windows1251Encoding.h" />
+    <ClInclude Include="..\..\..\include\Base\Windows1252Encoding.h" />
+    <ClInclude Include="..\..\..\include\Classic\classicopc.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Ae\AeEvent.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Ae\AeServer.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Ae\AeServerStatus.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Ae\AeSubscription.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\ClientBase.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaBrowser.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaCommon.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaGroup.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaItem.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaItemProperty.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaServer.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Da\DaServerStatus.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaAggregate.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaAggregateId.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaItem.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaItemAttribute.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaItemAttributeId.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaServer.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\Hda\HdaServerStatus.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\OpcBase.h" />
+    <ClInclude Include="..\..\..\include\DaAeHdaClient\OpcClientSdk.h" />
+    <ClInclude Include="OpcUti.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Base\Ascii.cpp" />
+    <ClCompile Include="..\Base\ASCIIEncoding.cpp" />
+    <ClCompile Include="..\Base\AtomicCounter.cpp" />
+    <ClCompile Include="..\Base\Bugcheck.cpp" />
+    <ClCompile Include="..\Base\ByteOrder.cpp" />
+    <ClCompile Include="..\Base\DateTime.cpp" />
+    <ClCompile Include="..\Base\DateTimeFormat.cpp" />
+    <ClCompile Include="..\Base\DateTimeFormatter.cpp" />
+    <ClCompile Include="..\Base\DateTimeParser.cpp" />
+    <ClCompile Include="..\Base\Debugger.cpp" />
+    <ClCompile Include="..\Base\Exception.cpp" />
+    <ClCompile Include="..\Base\FPEnvironment.cpp" />
+    <ClCompile Include="..\Base\Hash.cpp" />
+    <ClCompile Include="..\Base\HashStatistic.cpp" />
+    <ClCompile Include="..\Base\Latin1Encoding.cpp" />
+    <ClCompile Include="..\Base\Latin2Encoding.cpp" />
+    <ClCompile Include="..\Base\Latin9Encoding.cpp" />
+    <ClCompile Include="..\Base\LocalDateTime.cpp" />
+    <ClCompile Include="..\Base\Logger.cpp" />
+    <ClCompile Include="..\Base\MemoryStream.cpp" />
+    <ClCompile Include="..\Base\Mutex.cpp" />
+    <ClCompile Include="..\Base\NumberFormatter.cpp" />
+    <ClCompile Include="..\Base\NumericString.cpp" />
+    <ClCompile Include="..\Base\RWLock.cpp" />
+    <ClCompile Include="..\Base\ServerStates.cpp" />
+    <ClCompile Include="..\Base\Status.cpp" />
+    <ClCompile Include="..\Base\StatusCodes.cpp" />
+    <ClCompile Include="..\Base\String.cpp" />
+    <ClCompile Include="..\Base\TextConverter.cpp" />
+    <ClCompile Include="..\Base\TextEncoding.cpp" />
+    <ClCompile Include="..\Base\TextIterator.cpp" />
+    <ClCompile Include="..\Base\Timespan.cpp" />
+    <ClCompile Include="..\Base\Timestamp.cpp" />
+    <ClCompile Include="..\Base\Timezone.cpp" />
+    <ClCompile Include="..\Base\UnicodeConverter.cpp" />
+    <ClCompile Include="..\Base\UTF16Encoding.cpp" />
+    <ClCompile Include="..\Base\UTF32Encoding.cpp" />
+    <ClCompile Include="..\Base\UTF8Encoding.cpp" />
+    <ClCompile Include="..\Base\Windows1250Encoding.cpp" />
+    <ClCompile Include="..\Base\Windows1251Encoding.cpp" />
+    <ClCompile Include="..\Base\Windows1252Encoding.cpp" />
+    <ClCompile Include="Ae\AeEvent.cpp" />
+    <ClCompile Include="Ae\AeEventSinkImpl.cpp" />
+    <ClCompile Include="Ae\AeServer.cpp" />
+    <ClCompile Include="Ae\AeServerStatus.cpp" />
+    <ClCompile Include="Ae\AeSubscription.cpp" />
+    <ClCompile Include="Da\DaBrowser.cpp" />
+    <ClCompile Include="Da\DaCommon.cpp" />
+    <ClCompile Include="Da\DaGroup.cpp" />
+    <ClCompile Include="Da\DaItem.cpp" />
+    <ClCompile Include="Da\DaItemProperty.cpp" />
+    <ClCompile Include="Da\DaServer.cpp" />
+    <ClCompile Include="Da\DaServerStatus.cpp" />
+    <ClCompile Include="Da\MatchPattern.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Hda\HdaAggregate.cpp" />
+    <ClCompile Include="Hda\HdaItemAttribute.cpp" />
+    <ClCompile Include="Hda\HdaServer.cpp" />
+    <ClCompile Include="Hda\HdaServerStatus.cpp" />
+    <ClCompile Include="OpcAccess.cpp" />
+    <ClCompile Include="OpcBase.cpp" />
+    <ClCompile Include="OpcUti.cpp" />
+    <ClCompile Include="OpcUtils.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="system\ClientSdk_i.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Version.rc">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">TECHNOSOFTWARE_WIN32;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">TECHNOSOFTWARE_WIN32;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
