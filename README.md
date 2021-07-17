@@ -32,9 +32,3 @@ The OPC DA/AE/HDA Client Solution C++ One-time fee for lifetime SCLA 1.0 license
 ### Get Support for the Solution under GPL 3.0 or SCLA 1.0:
 
 Support for the Solution under the GPL 3.0 or SCLA 1.0 is available [here](https://github.com/technosoftware-gmbh/opcdaaehda-client-solution-cpp/issues).
-
-### Get Support with a Support Subscription:
-
-The Support Subscription is ideal for a corporation and a user of Technosoftware GmbH’s solutions on productive systems for which you want to get support for.
-
-There are different levels availabe for purchase available [here](https://technosoftware.com/product/opc-support/).
