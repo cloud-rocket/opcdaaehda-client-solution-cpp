@@ -131,9 +131,9 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
             py::arg("clientHandle") = 0,
             py::arg("requestedDataType") = 0, //VT_EMPTY,
             py::arg("isActive") = true,
-            py::arg("accessPath") = nullptr,
+            py::arg("accessPath") = "",
             py::arg("blobSize") = 0,
-            py::arg("blob") = nullptr)
+            py::arg("blob") = 0)
         .def("RemoveAll", &DaItemDefinitions::RemoveAll);
 
     py::class_<DaItem, std::unique_ptr<DaItem, py::nodelete>>(m, "DaItem", opcObject)
@@ -146,12 +146,12 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def(py::init<DaServer*, const char*, bool, uint32_t, ClientHandle, long*, float*, uint32_t>(),
             R"pbdoc(Constructs a DaGroup object.)pbdoc",
             py::arg("parent"),
-            py::arg("name") = nullptr,
+            py::arg("name") = "", //nullptr,
             py::arg("active") = true,
             py::arg("requestedUpdateRate") = 0,
             py::arg("handleClientGroup") = 0xFFFFFFFF,
-            py::arg("timeBias") = nullptr,
-            py::arg("percentDeadband") = nullptr,
+            py::arg("timeBias") = 0, //nullptr,
+            py::arg("percentDeadband") = 0, // nullptr,
             py::arg("lcId") = 0x800)
         .def("IsActive", &DaGroup::IsActive, R"pbdoc(Indicates the current active state of the group object.)pbdoc")
         .def("IsEnabled", &DaGroup::IsEnabled, R"pbdoc(Indicates if data change notifications via the Data Change Subscription are enabled or disabled.)pbdoc")
@@ -160,7 +160,7 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def("GetServerHandle", &DaGroup::GetServerHandle, R"pbdoc(The server handle of the group object.)pbdoc")
         .def("GetClientHandle", &DaGroup::GetClientHandle, R"pbdoc(The client handle of the group object.)pbdoc")
         .def("SetActive", &DaGroup::SetActive, R"pbdoc(Sets the active state of the group object.)pbdoc")
-        //.def("AddItems", &DaGroup::AddItems, R"pbdoc(Adds items to the group object.)pbdoc")
+        .def("AddItems", &DaGroup::AddItems, R"pbdoc(Adds items to the group object.)pbdoc")
         .def("Read", &DaGroup::Read, R"pbdoc(Reads the value, quality and timestamp of the specified items.)pbdoc")
         .def("Write", &DaGroup::Write, R"pbdoc(Writes the values of the specified items.)pbdoc")
         .def("SetDataSubscription", &DaGroup::SetDataSubscription, R"pbdoc(Activates or inactivate's the Data Change Subscription of this group object.)pbdoc")

@@ -1,6 +1,13 @@
 import inspect
 from opcdaaehdaclient import Status, DaServer,DaBrowseElementFilter, DaBrowseFilters, DaBrowser, DaGroup, DaItemDefinitions
 
+#-----------------------------------------------------------------------------
+# This handler is called for all items which cannot be added successfully.
+#-----------------------------------------------------------------------------
+def AddItemErrHandler(itemDef, res):
+    print(f"   Cannot add item '{itemDef.ItemIdentifier}': {res}")
+
+
 
 if __name__ == '__main__':
 
@@ -23,12 +30,28 @@ if __name__ == '__main__':
 
         print(f"Server Vendor: {daServerstatus.GetVendorInfo()}")
 
-        maxLoops = 100
+        maxLoops = 1
 
 
-        daGroup = DaGroup(myDaServer, 'OPC TestGroup', True, 1000)
+        for i in range(0, maxLoops):
 
-        daItemDefinitions = DaItemDefinitions()
+            daGroup = DaGroup(myDaServer, 'OPC TestGroup', True, 1000)
+
+            addedItems = []
+            daItemDefinitions = DaItemDefinitions()
+
+            status = daItemDefinitions.Add("CTT.SimpleTypes.InOut.Integer", 100)
+            if status.IsGood():
+                status = daItemDefinitions.Add("SimulatedData.Random", 150)
+
+            if status.IsNotGood():
+                 print(f"   Cannot add item definition to the item definition list: {status.ToString()}")
 
 
-        #status = daItemDefinitions.Add("CTT.SimpleTypes.InOut.Integer")
+            #status = daGroup.AddItems(daItemDefinitions, addedItems, AddItemErrHandler)
+#        if (!status.IsGood()) {
+#            cout << "   Cannot add all items: " << status.ToString() << endl;
+#            return 1;
+#            }
+
+            del daGroup
