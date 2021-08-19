@@ -36,6 +36,7 @@ def ShowElements(daBrowser):
 if __name__ == '__main__':
 
     serverName = "Matrikon.OPC.Simulation.1"
+    #serverName = "Technosoftware.DaSample"
     ipAddress = "localhost"
 
     myDaServer = DaServer()
@@ -53,6 +54,7 @@ if __name__ == '__main__':
     daBrowser = DaBrowser(myDaServer, daBrowseFilters)
 
     properties = daBrowser.GetProperties("Random.Int1");
+    #properties = daBrowser.GetProperties("SpecialItems.WithAnalogEUInfo");
 
     ShowProperties(properties);
 
@@ -69,8 +71,6 @@ if __name__ == '__main__':
 
     myDaServer.Disconnect()
 
-
-    #myDaServer.RegisterClientName("miro", False)
 
 
 
