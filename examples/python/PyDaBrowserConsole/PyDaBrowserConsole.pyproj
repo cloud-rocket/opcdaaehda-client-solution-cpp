@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>d1bc727f-f39e-4e84-a577-e4641bd50686</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PyDaBrowserConsole.py</StartupFile>
+    <StartupFile>PyDaConsole.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -26,6 +26,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PyDaBrowserConsole.py" />
+    <Compile Include="PyDaConsole.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\python\PythonWrapper\PythonWrapper.vcxproj">

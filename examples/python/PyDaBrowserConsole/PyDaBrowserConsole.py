@@ -44,32 +44,32 @@ if __name__ == '__main__':
 
     #myDaServer.UpdateStatus()
 
-    myDaServer.Connect(serverName, ipAddress);
-
-    print(myDaServer.IsConnected())
-
-
-    daBrowseFilters = DaBrowseFilters(DaBrowseElementFilter.All, '', '', 0, True, True)
-
-    daBrowser = DaBrowser(myDaServer, daBrowseFilters)
-
-    properties = daBrowser.GetProperties("Random.Int1");
-    #properties = daBrowser.GetProperties("SpecialItems.WithAnalogEUInfo");
-
-    ShowProperties(properties);
-
-    status = daBrowser.Browse("")
+    status = myDaServer.Connect(serverName, ipAddress);
     if status.IsNotGood():
-        print(f"Cannot browse the Server Address Space: {status}")
+        print(f"Cannot connect: {status}")
+    else:
 
-    els = daBrowser.GetElements();
+        daBrowseFilters = DaBrowseFilters(DaBrowseElementFilter.All, '', '', 0, True, True)
 
-    ShowElements(daBrowser)
+        daBrowser = DaBrowser(myDaServer, daBrowseFilters)
 
-    # This is needed to enforce order distruction (instead of new/delete in C++)
-    del daBrowser
+        properties = daBrowser.GetProperties("Random.Int1");
+        #properties = daBrowser.GetProperties("SpecialItems.WithAnalogEUInfo");
 
-    myDaServer.Disconnect()
+        ShowProperties(properties);
+
+        status = daBrowser.Browse("")
+        if status.IsNotGood():
+            print(f"Cannot browse the Server Address Space: {status}")
+
+        els = daBrowser.GetElements();
+
+        ShowElements(daBrowser)
+
+        # This is needed to enforce order distruction (instead of new/delete in C++)
+        del daBrowser
+
+        myDaServer.Disconnect()
 
 
 
