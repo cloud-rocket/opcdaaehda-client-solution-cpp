@@ -1,5 +1,5 @@
 import inspect
-from opcdaaehdaclient import Status, DaServer,DaBrowseElementFilter, DaBrowseFilters, DaBrowser, DaGroup, DaItemDefinitions
+from opcdaaehdaclient import Status, DaServer,DaBrowseElementFilter, DaBrowseFilters, DaBrowser, DaGroup, DaItemDefinitions, DaItems, DaItem
 
 #-----------------------------------------------------------------------------
 # This handler is called for all items which cannot be added successfully.
@@ -9,7 +9,7 @@ def AddItemErrHandler(itemDef, res):
 
 
 
-if __name__ == '__main__':
+def main():
 
     serverName = "Matrikon.OPC.Simulation.1"
     #serverName = "Technosoftware.DaSample"
@@ -24,34 +24,50 @@ if __name__ == '__main__':
 
     if status.IsNotGood():
         print(f"Cannot connect: {status}")
-    else:
+        return 1
 
-        daServerstatus = myDaServer.GetStatus()
+    daServerstatus = myDaServer.GetStatus()
 
-        print(f"Server Vendor: {daServerstatus.GetVendorInfo()}")
+    print(f"Server Vendor: {daServerstatus.GetVendorInfo()}")
 
-        maxLoops = 1
+    maxLoops = 1
 
 
-        for i in range(0, maxLoops):
+    for i in range(0, maxLoops):
 
+        try:
             daGroup = DaGroup(myDaServer, 'OPC TestGroup', True, 1000)
 
-            addedItems = []
+            addedItems = DaItems()
             daItemDefinitions = DaItemDefinitions()
 
-            status = daItemDefinitions.Add("CTT.SimpleTypes.InOut.Integer", 100)
+            status = daItemDefinitions.Add("Random.Real8", 100)
             if status.IsGood():
-                status = daItemDefinitions.Add("SimulatedData.Random", 150)
+                status = daItemDefinitions.Add("Random.Real4", 150)
 
             if status.IsNotGood():
-                 print(f"   Cannot add item definition to the item definition list: {status.ToString()}")
+                    print(f"   Cannot add item definition to the item definition list: {status}")
+                    return 1
 
 
-            #status = daGroup.AddItems(daItemDefinitions, addedItems, AddItemErrHandler)
-#        if (!status.IsGood()) {
-#            cout << "   Cannot add all items: " << status.ToString() << endl;
-#            return 1;
-#            }
+            status = daGroup.AddItems(daItemDefinitions, addedItems)
 
+            if not status.IsGood() :
+                print(f"   Cannot add all items: {status}" )
+                return 1
+
+
+            # Write values
+            writeItems = DaItems()
+            writeItems.append(addedItems[0])
+
+            #p = tagVARIANT()
+
+            #writeItems[0].SetWriteValue(i)
+
+        finally:
             del daGroup
+
+if __name__ == '__main__':
+
+    main()
