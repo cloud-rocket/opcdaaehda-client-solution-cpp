@@ -1,5 +1,7 @@
 // https://docs.microsoft.com/en-us/visualstudio/python/working-with-c-cpp-python-in-visual-studio?view=vs-2019
 
+#define _HAS_STD_BYTE 0
+
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
@@ -12,6 +14,79 @@ namespace py = pybind11;
 
 using namespace Technosoftware::Base;
 using namespace Technosoftware::DaAeHdaClient;
+
+
+// Converting from Python types to VARIANT
+// https://windowsquestions.com/2020/12/11/expressing-a-python-class-as-a-type-in-stdvariant-in-c-using-pybind11/
+//py::object Decimal = py::module_::import("decimal").attr("Decimal");
+
+
+
+namespace pybind11 {
+    namespace detail {
+        template <> struct type_caster<tagVARIANT> {
+        public:
+            /**
+             * This macro establishes the name 'inty' in
+             * function signatures and declares a local variable
+             * 'value' of type inty
+             */
+            PYBIND11_TYPE_CASTER(tagVARIANT, _("object"));
+
+            /**
+             * Conversion part 1 (Python->C++): convert a PyObject into a inty
+             * instance or return false upon failure. The second argument
+             * indicates whether implicit conversions should be applied.
+             */
+            bool load(handle src, bool) {
+                /* Extract PyObject from handle */
+                PyObject* source = src.ptr();
+                /* Try converting into a Python integer value */
+                PyObject* tmp = PyNumber_Long(source);
+                if (!tmp)
+                    return false;
+                /* Now try to convert into a C++ int */
+                value.lVal = PyLong_AsLong(tmp);
+                Py_DECREF(tmp);
+                /* Ensure return code was OK (to avoid out-of-range errors etc) */
+                return !(value.lVal == -1 && !PyErr_Occurred());
+            }
+
+            /**
+             * Conversion part 2 (C++ -> Python): convert an inty instance into
+             * a Python object. The second and third arguments are used to
+             * indicate the return value policy and parent object (for
+             * ``return_value_policy::reference_internal``) and are generally
+             * ignored by implicit casters.
+             */
+            static handle cast(VARIANT src, return_value_policy /* policy */, handle /* parent */) {
+
+
+                switch (src.vt) {
+                case VT_EMPTY:
+                    return Py_None;
+
+                case VT_BOOL:
+                    return PyBool_FromLong(src.boolVal);
+
+                case VT_I2:
+                case VT_I4:
+                case VT_DECIMAL:
+                    return PyLong_FromLong(src.lVal);
+
+
+                case VT_R4:
+                case VT_R8:
+                    return PyFloat_FromDouble(src.dblVal);
+                default:
+                    return  PyLong_FromLong(5);
+                }
+            }
+        };
+    }
+} // namespace pybind11::detail
+
+
 
 using errorHandler = std::function<void(const DaItemDefinition& itemDefinition, Status status)>;
 
@@ -28,6 +103,55 @@ public:
         return AddItems(itemDefinitions, items);
     }
 };
+
+
+/*class PyDaIDataCallback : public DaIDataCallback {
+public:
+    using DaIDataCallback::DaIDataCallback; // Inherit the constructors
+
+    void DataChange(uint32_t        transactionId,
+        DaGroup* group,
+        bool            allQualitiesGood,
+        bool            allResultsOk,
+        uint32_t        numberOfItems,
+        DaItem** items) override {
+            PYBIND11_OVERRIDE_PURE(
+                void, // Return type 
+                DaIDataCallback,      // Parent class 
+                DataChange,          // Name of function in C++ (must match Python name) 
+                transactionId,          // Argument(s) 
+                group,
+                allQualitiesGood,
+                allResultsOk,
+                numberOfItems,
+                items
+            );
+
+    }
+};
+    
+    */
+
+
+  /*  void ReadComplete(uint32_t        transactionId,
+        DaGroup* group,
+        bool            allQualitiesGood,
+        bool            allResultsOk,
+        uint32_t        numberOfItems,
+        DaItem** items) override {
+            PYBIND11_OVERRIDE_PURE(
+                void, // Return type 
+                DaIDataCallback,      // Parent class 
+                DataChange,          // Name of function in C++ (must match Python name) 
+                transactionId,          // Argument(s) 
+                group,
+                allQualitiesGood,
+                allResultsOk,
+                numberOfItems,
+                items
+            );
+
+    }*/
 
 
 
@@ -52,6 +176,23 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def("IsNotGood", &Status::IsNotGood)
         .def("IsNotBad", &Status::IsNotBad)
         .def("__str__", &Status::ToString);
+
+    py::class_<Timestamp>(m, "Timestamp")
+        .def(py::init<>())
+        .def("Swap", &Timestamp::Swap)
+        .def("Update", &Timestamp::Update)
+        .def("GetEpochTime", &Timestamp::GetEpochTime)
+        .def("GetUtcTime", &Timestamp::GetUtcTime)
+        .def("GetEpochMicroseconds", &Timestamp::GetEpochMicroseconds)
+        .def("GetElapsed", &Timestamp::GetElapsed)
+        .def("IsElapsed", &Timestamp::IsElapsed)
+        .def("GetRaw", &Timestamp::GetRaw)
+        .def("FromEpochTime", &Timestamp::FromEpochTime)
+        .def("FromUtcTime", &Timestamp::FromUtcTime)
+        .def("GetResolution", &Timestamp::GetResolution)
+        .def("FromFileTime", &Timestamp::FromFileTime)
+        .def("ToFileTime", &Timestamp::ToFileTime);
+
 
     py::class_<DaServerStatus, std::unique_ptr<DaServerStatus, py::nodelete>>(m, "DaServerStatus", opcObject)
         .def("GetStartTime", &DaServerStatus::GetStartTime)
@@ -161,12 +302,34 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
             py::arg("blob") = 0)
         .def("RemoveAll", &DaItemDefinitions::RemoveAll);
 
+    py::class_<DaItem::DaReadResult, std::unique_ptr<DaItem::DaReadResult, py::nodelete>>(m, "DaReadResult")
+        .def("GetValue", &DaItem::DaReadResult::GetValue)
+        .def("GetTimeStamp", &DaItem::DaReadResult::GetTimeStamp)
+        .def("GetQuality", &DaItem::DaReadResult::GetQuality)
+        .def("GetQualityAsText", &DaItem::DaReadResult::GetQualityAsText)
+        .def("GetResult", &DaItem::DaReadResult::GetResult);
+
+    py::class_<DaItem::DaWriteResult, std::unique_ptr<DaItem::DaWriteResult, py::nodelete>>(m, "DaWriteResult")
+        .def("Result", &DaItem::DaWriteResult::Result);
+
     py::class_<DaItem, std::unique_ptr<DaItem, py::nodelete>>(m, "DaItem", opcObject)
         .def("GetCanonicalDataType", &DaItem::GetCanonicalDataType)
         .def("GetClientHandle", &DaItem::GetClientHandle)
         .def("GetServerHandle", &DaItem::GetServerHandle)
         .def("GetAccessRights", &DaItem::GetAccessRights)
-        .def("SetWriteValue", &DaItem::SetWriteValue);
+        .def("GetReadResult", &DaItem::GetReadResult, py::return_value_policy::reference)
+        .def("GetReadAsyncResult", &DaItem::GetReadAsyncResult, py::return_value_policy::reference)
+        .def("GetWriteResult", &DaItem::GetWriteResult, py::return_value_policy::reference)
+        .def("GetWriteAsyncResult", &DaItem::GetWriteAsyncResult, py::return_value_policy::reference)
+        .def("GetAsyncCommandResult", &DaItem::GetAsyncCommandResult)
+        .def("SetWriteValue", &DaItem::SetWriteValue)
+        .def("Write", py::overload_cast<>(&DaItem::Write))
+        .def("Write", py::overload_cast<LPVARIANT>(&DaItem::Write))
+        .def("WriteAsync", py::overload_cast<uint32_t, uint32_t*>(&DaItem::WriteAsync))
+        .def("WriteAsync", py::overload_cast<LPVARIANT, uint32_t, uint32_t*>(&DaItem::WriteAsync))
+        .def("Read", &DaItem::Read)
+        .def("ReadAsync", py::overload_cast<uint32_t, uint32_t*>(&DaItem::ReadAsync))
+        .def("Cancel", &DaItem::Cancel);
 
 
     py::class_<DaGroupTrampoline>(m, "DaGroup", opcObject)
@@ -195,7 +358,11 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
             py::arg("items"), 
             py::arg("errorHandler") = nullptr
             )*/
-        .def("Read", &DaGroupTrampoline::Read, R"pbdoc(Reads the value, quality and timestamp of the specified items.)pbdoc")
+        .def("Read", &DaGroupTrampoline::Read, 
+            R"pbdoc(Reads the value, quality and timestamp of the specified items.)pbdoc",
+            py::arg("items"),
+            py::arg("fromCache") = true
+            )
         .def("Write", &DaGroupTrampoline::Write, R"pbdoc(Writes the values of the specified items.)pbdoc")
         .def("SetDataSubscription", &DaGroupTrampoline::SetDataSubscription, R"pbdoc(Activates or inactivate's the Data Change Subscription of this group object.)pbdoc")
         .def("ReadAsync", &DaGroupTrampoline::ReadAsync, R"pbdoc(Reads the value, quality and timestamp of the specified items asynchronously.)pbdoc")
@@ -205,6 +372,8 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def("Refresh", &DaGroupTrampoline::Refresh, R"pbdoc(Forces a data change notification for all active items.)pbdoc")
         ;
 
+
+   // py::class_<DaIDataCallback>
 
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;

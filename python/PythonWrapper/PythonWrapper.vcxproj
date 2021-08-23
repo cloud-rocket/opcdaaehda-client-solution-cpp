@@ -146,6 +146,8 @@
       <SDLCheck>true</SDLCheck>
       <SupportJustMyCode>false</SupportJustMyCode>
       <AdditionalIncludeDirectories>$(SolutionDir)include;$(PythonHome)Include;$(PythonHome)Lib\site-packages\pybind11\include;%(AdditionalIncludeDirectories);$(PythonHome)Lib\site-packages\pybind11\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -182,6 +184,8 @@
       <RuntimeLibrary>Multithreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(SolutionDir)include;$(PythonHome)Include;$(PythonHome)Lib\site-packages\pybind11\include;%(AdditionalIncludeDirectories);$(PythonHome)Lib\site-packages\pybind11\include</AdditionalIncludeDirectories>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

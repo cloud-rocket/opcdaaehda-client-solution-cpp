@@ -139,7 +139,8 @@
       <PreprocessorDefinitions>_WINDLL;TECHNOSOFTWARE_NO_UNWINDOWS;TECHNOSOFTWARE_LICENSE_CHECK;WIN64;_WIN64;%(PreprocessorDefinitions);OPCCLIENTSDK_EXPORTS;TECHNOSOFTWARE_EXPORTS;_OPC_DA_SUPPORTED;_OPC_AE_SUPPORTED;_OPC_HDA_SUPPORTED</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;..\..\..\include;.\system;.\License;..;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level1</WarningLevel>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,7 +160,8 @@
       <PreprocessorDefinitions>_WINDLL;TECHNOSOFTWARE_NO_UNWINDOWS;TECHNOSOFTWARE_LICENSE_CHECK;WIN64;_WIN64;%(PreprocessorDefinitions);OPCCLIENTSDK_EXPORTS;TECHNOSOFTWARE_EXPORTS;_OPC_DA_SUPPORTED;_OPC_AE_SUPPORTED;_OPC_HDA_SUPPORTED</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>.;..\..\..\include;.\system;.\License;..;$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level1</WarningLevel>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
