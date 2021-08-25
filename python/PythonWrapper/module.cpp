@@ -1,13 +1,28 @@
+/*
+ * Copyright (c) 2021 Meir Tseitlin. All rights reserved
+ * Web: https://www.linkedin.com/in/meirts/
+ *
+ * The source code in this file is covered under GPL V3
+ *
+ * GNU General Public License as published by the Free Software Foundation;
+ * version 3 of the License are accompanied with this source code.
+ * See https://technosoftware.com/license/GPLv3License.txt
+ *
+ * This source code is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+
 // https://docs.microsoft.com/en-us/visualstudio/python/working-with-c-cpp-python-in-visual-studio?view=vs-2019
 
-#define _HAS_STD_BYTE 0
+#define _HAS_STD_BYTE 0 // Required for CPPv17 support
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 #include <pybind11/complex.h>
 #include <pybind11/functional.h>
-//#include <pybind11/chrono.h>
 #include "DaAeHdaClient/OpcClientSdk.h"
 
 namespace py = pybind11;
@@ -164,6 +179,40 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
 
     // void(*errorHandler)(const DaItemDefinition& itemDefinition, Base::Status status)
 
+    // Enums
+    py::enum_<COINIT>(m, "COINIT")
+        .value("AppartmentThreaded", COINIT_APARTMENTTHREADED, "Initializes the thread for apartment-threaded object concurrency.")
+        .value("MultiThreaded", COINIT_MULTITHREADED, "Initializes the thread for multithreaded object concurrency.")
+        .value("DisableOle1DDE", COINIT_DISABLE_OLE1DDE, "Disables DDE for OLE1 support..")
+        .value("SpeedOverMemory", COINIT_SPEED_OVER_MEMORY, "Increase memory usage in an attempt to increase performance.")
+        .export_values();
+
+    py::enum_<DaBrowseElementFilter>(m, "DaBrowseElementFilter")
+        .value("All", DaBrowseElementFilter::All, "All type of elements are returned.")
+        .value("Branches", DaBrowseElementFilter::Branches, " Only elements with children elements are returned.")
+        .value("Items", DaBrowseElementFilter::Items, " Only elements with children elements are returned.")
+        .export_values();
+
+    py::enum_<ServerStates::ServerState>(m, "ServerState")
+        .value("Running", ServerStates::ServerState::Running, "The server is running normally.")
+        .value("Failed", ServerStates::ServerState::Failed, "A vendor-specific fatal error has occurred within the server. The server is no longer functioning. The recovery procedure from this situation is vendor-specific. Most Service requests should be expected to fail.")
+        .value("NoConfiguration", ServerStates::ServerState::NoConfiguration, "The server is running but has no configuration information loaded and therefore does not transfer data.")
+        .value("Suspended", ServerStates::ServerState::Suspended, "The server has been temporarily suspended by some vendor-specific method and is not receiving or sending data.")
+        .value("Shutdown", ServerStates::ServerState::Shutdown, "The server has shut down or is in the process of shutting down. Depending on the implementation, this might or might not be visible to clients.")
+        .value("Test", ServerStates::ServerState::Test, "The server is in Test Mode. The outputs are disconnected from the real hardware, but the server will otherwise behave normally. Inputs may be real or may be simulated depending on the vendor implementation. StatusCode will generally be returned normally.")
+        .value("CommunicationFault", ServerStates::ServerState::CommunicationFault, "The server is running properly, but is having difficulty accessing data from its data sources. This may be due to communication problems or some other problem preventing the underlying device, control system, etc. from returning valid data. It may be a complete failure, meaning that no data is available, or a partial failure, meaning that some data is still available. It is expected that items affected by the fault will individually return with a BAD FAILURE status code indication for the items.")
+        .value("Unknown", ServerStates::ServerState::Unknown, "This state is used only to indicate that the OPC server does not know the state of underlying servers.")
+        .export_values();
+
+    py::enum_<OpcTextMode>(m, "OpcTextMode")
+        .value("Valuename", OpcTextMode::Valuename, "The returned text string represents the name of the value as it was defined in accordance with the appropriate OPC Specification.")
+        .value("Uppercase", OpcTextMode::Uppercase, " All characters in the returned text string are uppercase.")
+        .value("Lowercase", OpcTextMode::Lowercase, "All characters in the returned text string are lowercase.")
+        .value("Capitalize", OpcTextMode::Lowercase, "The first character of the returned text string is a capital letter.")
+        .export_values();
+
+
+
     py::class_<Status>(m, "Status", opcObject)
         .def(py::init<>())
         .def("IsError", &Status::IsError)
@@ -223,12 +272,6 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def("RegisterClientName", &DaServer::RegisterClientName);
 
 
-    py::enum_<DaBrowseElementFilter>(m, "DaBrowseElementFilter")
-        .value("All", DaBrowseElementFilter::All, "All type of elements are returned.")
-        .value("Branches", DaBrowseElementFilter::Branches, " Only elements with children elements are returned.")
-        .value("Items", DaBrowseElementFilter::Items, " Only elements with children elements are returned.")
-        .export_values();
-
     py::class_<DaBrowseFilters>(m, "DaBrowseFilters", opcObject)
         .def(py::init<DaBrowseElementFilter, const string&, const string&, uint32_t, bool, bool, VARTYPE, uint32_t>(),
             R"pbdoc(Constructs a DaBrowseFilters object.)pbdoc", 
@@ -265,13 +308,6 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def("SetFilters", &DaBrowser::SetFilters)
         .def("GetPropertyValueAsText", &DaBrowser::GetPropertyValueAsText)
         .def("GetProperties", &DaBrowser::GetProperties);
-
-    py::enum_<OpcTextMode>(m, "OpcTextMode")
-        .value("Valuename", OpcTextMode::Valuename, "The returned text string represents the name of the value as it was defined in accordance with the appropriate OPC Specification.")
-        .value("Uppercase", OpcTextMode::Uppercase, " All characters in the returned text string are uppercase.")
-        .value("Lowercase", OpcTextMode::Lowercase, "All characters in the returned text string are lowercase.")
-        .value("Capitalize", OpcTextMode::Lowercase, "The first character of the returned text string is a capital letter.")
-        .export_values();
 
     py::class_<DaItemProperty>(m, "DaItemProperty", opcObject)
         .def(py::init<>())
