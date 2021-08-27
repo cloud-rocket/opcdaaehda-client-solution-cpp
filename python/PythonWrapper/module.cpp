@@ -23,6 +23,7 @@
 #include <pybind11/stl_bind.h>
 #include <pybind11/complex.h>
 #include <pybind11/functional.h>
+#include <PythonCOM.h>
 #include "DaAeHdaClient/OpcClientSdk.h"
 
 namespace py = pybind11;
@@ -54,6 +55,26 @@ namespace pybind11 {
              * indicates whether implicit conversions should be applied.
              */
             bool load(handle src, bool) {
+
+
+                /*
+  if (PyString_Check(value)) {
+    return PyString_AsString(value);
+  }
+  else if (value == Py_None) {
+    return variant();
+  }
+  else if (PyBool_Check(value)) {
+    return value == Py_True;
+  }
+  else if (PyInt_Check(value)) {
+    return PyInt_AsLong(value);
+  }
+  else if (PyFloat_Check(value)) {
+    return PyFloat_AsDouble(value);
+  }
+                */
+
                 /* Extract PyObject from handle */
                 PyObject* source = src.ptr();
                 /* Try converting into a Python integer value */
@@ -77,7 +98,9 @@ namespace pybind11 {
             static handle cast(VARIANT src, return_value_policy /* policy */, handle /* parent */) {
 
 
-                switch (src.vt) {
+                return PyCom_PyObjectFromVariant(&src);
+
+/*                switch (src.vt) {
                 case VT_EMPTY:
                     return Py_None;
 
@@ -93,9 +116,20 @@ namespace pybind11 {
                 case VT_R4:
                 case VT_R8:
                     return PyFloat_FromDouble(src.dblVal);
+
+
+                case VT_BSTR: // String
+                    return PyUnicode_FromString(src.pcVal);
+
+                case VT_LPSTR: // "Pointer to string"
+                    return PyUnicode_FromString(src.pcVal);
+
+                // case VT_LPWSTR: / "Pointer to wide string"
+                //    return PyUnicode_FromUnicode(src.pbstrVal);
+
                 default:
                     return  PyLong_FromLong(5);
-                }
+                }*/
             }
         };
     }
@@ -301,13 +335,13 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def("GetElements", &DaBrowser::GetElements, "Allows the access to the Server Address Space elements returned by the last Browse() resp.BrowseNext() function call.")
         .def("GetFilters", &DaBrowser::GetFilters, "The currently used filters.")
         .def("HasMoreElements", &DaBrowser::HasMoreElements, "Indicates if Elements() contains all available elements from the current position or not.")
-        .def("IsBrowse2Used", &DaBrowser::IsBrowse2Used)
-        .def("IsBrowse3Used", &DaBrowser::IsBrowse3Used)
-        .def("Browse", &DaBrowser::Browse)
-        .def("BrowseNext", &DaBrowser::BrowseNext)
-        .def("SetFilters", &DaBrowser::SetFilters)
-        .def("GetPropertyValueAsText", &DaBrowser::GetPropertyValueAsText)
-        .def("GetProperties", &DaBrowser::GetProperties);
+        .def("IsBrowse2Used", &DaBrowser::IsBrowse2Used, "Indicates if the browser object uses the OPC 2.0 Browse functions.")
+        .def("IsBrowse3Used", &DaBrowser::IsBrowse3Used, "Indicates if the browser object uses the OPC 3.0 Browse functions.")
+        .def("Browse", &DaBrowser::Browse, "Returns all elements from the specified position which matches the filter criteria. The returned elements can be accessed via the function member Elements(). If this function is called then all elements returned by a previous call are removed.")
+        .def("BrowseNext", &DaBrowser::BrowseNext, "Returns the next elements from the current position.")
+        .def("SetFilters", &DaBrowser::SetFilters, "Sets new filters.")
+        .def("GetPropertyValueAsText", &DaBrowser::GetPropertyValueAsText, "Gets property value as text.")
+        .def("GetProperties", &DaBrowser::GetProperties, "Returns the item properties of the specified item ID.");
 
     py::class_<DaItemProperty>(m, "DaItemProperty", opcObject)
         .def(py::init<>())
@@ -318,10 +352,7 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def("GetItemId", &DaItemProperty::GetItemId)
         .def("GetResult", &DaItemProperty::GetResult)
         .def("GetDataTypeAsText", &DaItemProperty::GetDataTypeAsText, "Returns the Data Type as text string.", py::arg("textMode") = OpcTextMode::Capitalize)
-        .def("GetValueAsText", &DaItemProperty::GetValueAsText)
         .def("GetValueAsText", &DaItemProperty::GetValueAsText);
-
-    //py::class_<DaItemDefinition>(m, "DaItemDefinitions");
 
     py::class_<DaItemDefinitions>(m, "DaItemDefinitions", opcObject)
         .def(py::init<OpcObject*>(), 

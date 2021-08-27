@@ -96,8 +96,6 @@ def main():
         addedItems = DaItems()
         daItemDefinitions = DaItemDefinitions()
 
-
-
         status = daItemDefinitions.Add("Random.Int4", 100)
         if status.IsGood():
             status = daItemDefinitions.Add("Random.Real4", 150)
@@ -119,8 +117,7 @@ def main():
             return 1
 
         for item in addedItems:
-            print(item.GetReadResult().GetTimeStamp().GetEpochTime())
-            print(item.GetReadResult().GetValue())
+            print(f'{item.Name()}    |    {item.GetClientHandle()}    |    {item.GetReadResult().GetTimeStamp().GetEpochTime()}     |     {item.GetReadResult().GetValue()}')
 
             item.SetWriteValue(5)
 
