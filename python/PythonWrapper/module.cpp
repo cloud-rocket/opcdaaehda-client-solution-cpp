@@ -77,15 +77,21 @@ namespace pybind11 {
 
                 /* Extract PyObject from handle */
                 PyObject* source = src.ptr();
-                /* Try converting into a Python integer value */
-                PyObject* tmp = PyNumber_Long(source);
+
+
+                return PyCom_VariantFromPyObject(source, &value);
+
+
+
+                // Try converting into a Python integer value 
+                /*PyObject* tmp = PyNumber_Long(source);
                 if (!tmp)
                     return false;
-                /* Now try to convert into a C++ int */
+                // Now try to convert into a C++ int 
                 value.lVal = PyLong_AsLong(tmp);
                 Py_DECREF(tmp);
-                /* Ensure return code was OK (to avoid out-of-range errors etc) */
-                return !(value.lVal == -1 && !PyErr_Occurred());
+                // Ensure return code was OK (to avoid out-of-range errors etc) 
+                return !(value.lVal == -1 && !PyErr_Occurred());*/
             }
 
             /**
@@ -99,37 +105,6 @@ namespace pybind11 {
 
 
                 return PyCom_PyObjectFromVariant(&src);
-
-/*                switch (src.vt) {
-                case VT_EMPTY:
-                    return Py_None;
-
-                case VT_BOOL:
-                    return PyBool_FromLong(src.boolVal);
-
-                case VT_I2:
-                case VT_I4:
-                case VT_DECIMAL:
-                    return PyLong_FromLong(src.lVal);
-
-
-                case VT_R4:
-                case VT_R8:
-                    return PyFloat_FromDouble(src.dblVal);
-
-
-                case VT_BSTR: // String
-                    return PyUnicode_FromString(src.pcVal);
-
-                case VT_LPSTR: // "Pointer to string"
-                    return PyUnicode_FromString(src.pcVal);
-
-                // case VT_LPWSTR: / "Pointer to wide string"
-                //    return PyUnicode_FromUnicode(src.pbstrVal);
-
-                default:
-                    return  PyLong_FromLong(5);
-                }*/
             }
         };
     }
