@@ -55,26 +55,7 @@ namespace pybind11 {
              * indicates whether implicit conversions should be applied.
              */
             bool load(handle src, bool) {
-
-
-                /*
-  if (PyString_Check(value)) {
-    return PyString_AsString(value);
-  }
-  else if (value == Py_None) {
-    return variant();
-  }
-  else if (PyBool_Check(value)) {
-    return value == Py_True;
-  }
-  else if (PyInt_Check(value)) {
-    return PyInt_AsLong(value);
-  }
-  else if (PyFloat_Check(value)) {
-    return PyFloat_AsDouble(value);
-  }
-                */
-
+  
                 /* Extract PyObject from handle */
                 PyObject* source = src.ptr();
 
