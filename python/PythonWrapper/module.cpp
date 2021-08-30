@@ -98,6 +98,10 @@ using errorHandler = std::function<void(const DaItemDefinition& itemDefinition, 
 PYBIND11_MAKE_OPAQUE(std::vector<DaItem*>);
 
 
+void AddItemErrHandler(const Technosoftware::DaAeHdaClient::DaItemDefinition& itemDef, Technosoftware::Base::Status res)
+{
+    cout << "   Cannot add item '" << itemDef.ItemIdentifier << "': " << res.ToString() << endl;
+}
 
 class DaGroupTrampoline : public DaGroup {
 public:
@@ -106,6 +110,14 @@ public:
     Status AddItemsSimple(DaItemDefinitions& itemDefinitions,
         vector<DaItem*>& items) {
         return AddItems(itemDefinitions, items);
+    }
+
+    Status AddItemsWithCallback(DaItemDefinitions& itemDefinitions,
+        vector<DaItem*>& items, 
+        const std::function<void(const DaItemDefinition& itemDefinition, Status status)> &errHandler) {
+
+
+            return AddItems(itemDefinitions, items, AddItemErrHandler);
     }
 };
 
@@ -202,7 +214,7 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .export_values();
 
 
-
+    // Objects
     py::class_<Status>(m, "Status", opcObject)
         .def(py::init<>())
         .def("IsError", &Status::IsError)
@@ -373,15 +385,16 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def("GetServerHandle", &DaGroupTrampoline::GetServerHandle, R"pbdoc(The server handle of the group object.)pbdoc")
         .def("GetClientHandle", &DaGroupTrampoline::GetClientHandle, R"pbdoc(The client handle of the group object.)pbdoc")
         .def("SetActive", &DaGroupTrampoline::SetActive, R"pbdoc(Sets the active state of the group object.)pbdoc")
-        .def("AddItems", &DaGroupTrampoline::AddItemsSimple)
+        //.def("AddItems", &DaGroupTrampoline::AddItemsSimple)
+        .def("AddItems", &DaGroupTrampoline::AddItemsWithCallback)
         /*.def("AddItems", &DaGroup::AddItems,
             //py::return_value_policy::reference,
             R"pbdoc(Adds items to the group object.)pbdoc",
             py::arg("itemDefinitions"), 
             py::arg("items"), 
-            py::arg("errorHandler") = nullptr
+            py::arg("errorHandler") = AddItemErrHandler
             )*/
-        .def("Read", &DaGroupTrampoline::Read, 
+        .def("Read", &DaGroupTrampoline::Read,
             R"pbdoc(Reads the value, quality and timestamp of the specified items.)pbdoc",
             py::arg("items"),
             py::arg("fromCache") = true

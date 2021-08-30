@@ -61,7 +61,7 @@ def main():
             addedItems = DaItems()
             daItemDefinitions = DaItemDefinitions()
 
-            status = daItemDefinitions.Add("Random.Real8", 100)
+            status = daItemDefinitions.Add("bla", 100)
             if status.IsGood():
                 status = daItemDefinitions.Add("Random.Real4", 150)
 
@@ -70,11 +70,12 @@ def main():
                     return 1
 
 
-            status = daGroup.AddItems(daItemDefinitions, addedItems)
+            status = daGroup.AddItems(daItemDefinitions, addedItems, AddItemErrHandler)
             if not status.IsGood() :
                 print(f"   Cannot add all items: {status}" )
                 return 1
 
+            print('returning')
 
             # Write values
             writeItems = DaItems()
@@ -87,7 +88,7 @@ def main():
         finally:
             del daGroup
 
-
+    return
 
     # Subscription
     try:
