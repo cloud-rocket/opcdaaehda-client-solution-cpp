@@ -349,12 +349,12 @@ namespace Technosoftware
             if (res.IsNotGood()) {
                 for (i = 0; i < dwCreatedItemInstancesCount; i++) {
                     auto result = m_cItems.find(ItemDefs.parItemDefs_->m_aT[i].hClient);
-                    if (result != m_cItems.end()) {
-                        pItem = result->second;
-                    }
-                    else {
+                    if (result == m_cItems.end()) {
                         cout << "Element not found." << endl;
+                        continue;
                     }
+
+                    pItem = result->second;
                     ItemDefs.parItemDefs_->m_aT[i].hClient = pItem->clientHandle_;
                     delete pItem;
                 }
