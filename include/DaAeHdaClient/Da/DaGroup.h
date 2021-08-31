@@ -27,6 +27,7 @@
 #include "Base/Handles.h"
 #include "Base/Status.h"
 
+#include <functional>
 
 namespace Technosoftware
 {
@@ -36,6 +37,7 @@ namespace Technosoftware
         class DaItem;
         class DaIDataCallback;
         class DaGroupImpl;
+
 
         /**
          * @class   DaGroup
@@ -220,7 +222,7 @@ namespace Technosoftware
 
             Base::Status AddItems(  DaItemDefinitions& itemDefinitions,
                                     vector<DaItem*>& items,
-                                    void(*errorHandler)(const DaItemDefinition& itemDefinition, Base::Status status) = nullptr);
+                                    const std::function<void(const DaItemDefinition&, Base::Status)>& errorHandler = {});
 
             /**
              * @fn  Base::Status DaGroup::Read(vector<DaItem*>& items, bool fromCache = true);

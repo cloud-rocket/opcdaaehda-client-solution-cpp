@@ -128,7 +128,7 @@ namespace Technosoftware
             inline HRESULT SetActive(bool fActive);
             inline Technosoftware::Base::Status AddItems(DaItemDefinitions& ItemDefs,
                 vector<DaItem*>& arItems,
-                void(*pfnErrHandler)(const DaItemDefinition&, Technosoftware::Base::Status));
+                const std::function<void(const DaItemDefinition&, Base::Status)>& pfnErrHandler);
             inline Technosoftware::Base::Status Read(vector<DaItem*>& arItems, bool fFromCache);
             inline Technosoftware::Base::Status Write(vector<DaItem*>& arItems);
             inline Technosoftware::Base::Status SetDataSubscription(DaIDataCallback* pIUserDataCallback);
