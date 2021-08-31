@@ -93,11 +93,11 @@ namespace pybind11 {
 
 
 
-using errorHandler = std::function<void(const DaItemDefinition& itemDefinition, Status status)>;
+//using errorHandler = std::function<void(const DaItemDefinition& itemDefinition, Status status)>;
 
 PYBIND11_MAKE_OPAQUE(std::vector<DaItem*>);
 
-
+/*
 void AddItemErrHandler(const Technosoftware::DaAeHdaClient::DaItemDefinition& itemDef, Technosoftware::Base::Status res)
 {
     cout << "   Cannot add item '" << itemDef.ItemIdentifier << "': " << res.ToString() << endl;
@@ -122,7 +122,7 @@ public:
 };
 
 
-/*class PyDaIDataCallback : public DaIDataCallback {
+class PyDaIDataCallback : public DaIDataCallback {
 public:
     using DaIDataCallback::DaIDataCallback; // Inherit the constructors
 
@@ -367,7 +367,7 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .def("Cancel", &DaItem::Cancel);
 
 
-    py::class_<DaGroupTrampoline>(m, "DaGroup", opcObject)
+    py::class_<DaGroup>(m, "DaGroup", opcObject)
         .def(py::init<DaServer*, const char*, bool, uint32_t, ClientHandle, long*, float*, uint32_t>(),
             R"pbdoc(Constructs a DaGroup object.)pbdoc",
             py::arg("parent"),
@@ -378,34 +378,34 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
             py::arg("timeBias") = 0, //nullptr,
             py::arg("percentDeadband") = 0, // nullptr,
             py::arg("lcId") = 0x800)
-        .def("IsActive", &DaGroupTrampoline::IsActive, R"pbdoc(Indicates the current active state of the group object.)pbdoc")
-        .def("IsEnabled", &DaGroupTrampoline::IsEnabled, R"pbdoc(Indicates if data change notifications via the Data Change Subscription are enabled or disabled.)pbdoc")
-        .def("HasDataSubscription", &DaGroupTrampoline::HasDataSubscription, R"pbdoc(Indicates if the Data Change Subscription of this group object has been activated.)pbdoc")
-        .def("GetRevisedUpdateRate", &DaGroupTrampoline::GetRevisedUpdateRate, R"pbdoc(The revised update rate of the group object in milliseconds.)pbdoc")
-        .def("GetServerHandle", &DaGroupTrampoline::GetServerHandle, R"pbdoc(The server handle of the group object.)pbdoc")
-        .def("GetClientHandle", &DaGroupTrampoline::GetClientHandle, R"pbdoc(The client handle of the group object.)pbdoc")
-        .def("SetActive", &DaGroupTrampoline::SetActive, R"pbdoc(Sets the active state of the group object.)pbdoc")
+        .def("IsActive", &DaGroup::IsActive, R"pbdoc(Indicates the current active state of the group object.)pbdoc")
+        .def("IsEnabled", &DaGroup::IsEnabled, R"pbdoc(Indicates if data change notifications via the Data Change Subscription are enabled or disabled.)pbdoc")
+        .def("HasDataSubscription", &DaGroup::HasDataSubscription, R"pbdoc(Indicates if the Data Change Subscription of this group object has been activated.)pbdoc")
+        .def("GetRevisedUpdateRate", &DaGroup::GetRevisedUpdateRate, R"pbdoc(The revised update rate of the group object in milliseconds.)pbdoc")
+        .def("GetServerHandle", &DaGroup::GetServerHandle, R"pbdoc(The server handle of the group object.)pbdoc")
+        .def("GetClientHandle", &DaGroup::GetClientHandle, R"pbdoc(The client handle of the group object.)pbdoc")
+        .def("SetActive", &DaGroup::SetActive, R"pbdoc(Sets the active state of the group object.)pbdoc")
         //.def("AddItems", &DaGroupTrampoline::AddItemsSimple)
-        .def("AddItems", &DaGroupTrampoline::AddItemsWithCallback)
-        /*.def("AddItems", &DaGroup::AddItems,
-            //py::return_value_policy::reference,
+        //.def("AddItems", &DaGroupTrampoline::AddItemsWithCallback)
+        .def("AddItems", &DaGroup::AddItems,
+            py::return_value_policy::reference,
             R"pbdoc(Adds items to the group object.)pbdoc",
             py::arg("itemDefinitions"), 
             py::arg("items"), 
-            py::arg("errorHandler") = AddItemErrHandler
-            )*/
-        .def("Read", &DaGroupTrampoline::Read,
+            py::arg("errorHandler") = nullptr
+            )
+        .def("Read", &DaGroup::Read,
             R"pbdoc(Reads the value, quality and timestamp of the specified items.)pbdoc",
             py::arg("items"),
             py::arg("fromCache") = true
             )
-        .def("Write", &DaGroupTrampoline::Write, R"pbdoc(Writes the values of the specified items.)pbdoc")
-        .def("SetDataSubscription", &DaGroupTrampoline::SetDataSubscription, R"pbdoc(Activates or inactivate's the Data Change Subscription of this group object.)pbdoc")
-        .def("ReadAsync", &DaGroupTrampoline::ReadAsync, R"pbdoc(Reads the value, quality and timestamp of the specified items asynchronously.)pbdoc")
-        .def("WriteAsync", &DaGroupTrampoline::WriteAsync, R"pbdoc(Writes the values of the specified items asynchronously.)pbdoc")
-        .def("SetEnable", &DaGroupTrampoline::SetEnable, R"pbdoc(Enables or disables data change notifications via the Data Change Subscription.)pbdoc")
-        .def("Cancel", &DaGroupTrampoline::Cancel, R"pbdoc(Requests the server to cancel an outstanding asynchronous transaction.)pbdoc")
-        .def("Refresh", &DaGroupTrampoline::Refresh, R"pbdoc(Forces a data change notification for all active items.)pbdoc")
+        .def("Write", &DaGroup::Write, R"pbdoc(Writes the values of the specified items.)pbdoc")
+        .def("SetDataSubscription", &DaGroup::SetDataSubscription, R"pbdoc(Activates or inactivate's the Data Change Subscription of this group object.)pbdoc")
+        .def("ReadAsync", &DaGroup::ReadAsync, R"pbdoc(Reads the value, quality and timestamp of the specified items asynchronously.)pbdoc")
+        .def("WriteAsync", &DaGroup::WriteAsync, R"pbdoc(Writes the values of the specified items asynchronously.)pbdoc")
+        .def("SetEnable", &DaGroup::SetEnable, R"pbdoc(Enables or disables data change notifications via the Data Change Subscription.)pbdoc")
+        .def("Cancel", &DaGroup::Cancel, R"pbdoc(Requests the server to cancel an outstanding asynchronous transaction.)pbdoc")
+        .def("Refresh", &DaGroup::Refresh, R"pbdoc(Forces a data change notification for all active items.)pbdoc")
         ;
 
 

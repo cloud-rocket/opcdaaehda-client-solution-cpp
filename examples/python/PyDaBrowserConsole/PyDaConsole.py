@@ -27,7 +27,7 @@ from opcdaaehdaclient import Status, DaServer,DaBrowseElementFilter, DaBrowseFil
 # This handler is called for all items which cannot be added successfully.
 #-----------------------------------------------------------------------------
 def AddItemErrHandler(itemDef, res):
-    print(f"   Cannot add item '{itemDef.ItemIdentifier}': {res}")
+    print(f"   Python Cannot add item '{itemDef.ItemIdentifier}': {res}")
 
 def main():
 
@@ -61,13 +61,15 @@ def main():
             addedItems = DaItems()
             daItemDefinitions = DaItemDefinitions()
 
-            status = daItemDefinitions.Add("bla", 100)
+            status = daItemDefinitions.Add("Random.Real8", 100)
             if status.IsGood():
-                status = daItemDefinitions.Add("Random.Real4", 150)
+                status = daItemDefinitions.Add("Random1.Real4", 150)
 
             if status.IsNotGood():
                     print(f"   Cannot add item definition to the item definition list: {status}")
                     return 1
+
+
 
 
             status = daGroup.AddItems(daItemDefinitions, addedItems, AddItemErrHandler)
@@ -105,7 +107,7 @@ def main():
                 print(f"   Cannot add item definition to the item definition list: {status}")
                 return 1
 
-        status = daGroup.AddItems(daItemDefinitions, addedItems)
+        status = daGroup.AddItems(daItemDefinitions, addedItems, AddItemErrHandler)
         if not status.IsGood() :
             print(f"   Cannot add all items: {status}" )
             return 1

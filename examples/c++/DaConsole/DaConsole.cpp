@@ -250,7 +250,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
         status = daItemDefinitions.Add("CTT.SimpleTypes.InOut.Integer", 100);
         if (status.IsGood()) {
-            status = daItemDefinitions.Add("SimulatedData.Random", 150);
+            status = daItemDefinitions.Add("1SimulatedData.Random", 150);
         }
         if (status.IsNotGood()) {
             cout << "   Cannot add item definition to the item definition list: " << status.ToString() << endl;
