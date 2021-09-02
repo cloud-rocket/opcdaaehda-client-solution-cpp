@@ -24,6 +24,7 @@
 #include <pybind11/complex.h>
 #include <pybind11/functional.h>
 #include <PythonCOM.h>
+#include "Classic/inc32/opcda.h"
 #include "DaAeHdaClient/OpcClientSdk.h"
 
 namespace py = pybind11;
@@ -171,6 +172,50 @@ public:
     }*/
 
 
+enum class OpcDaPropertyName {
+    DataType = OPC_PROPERTY_DATATYPE,
+    Value = OPC_PROPERTY_VALUE,
+    Quality = OPC_PROPERTY_QUALITY,
+    Timestamp = OPC_PROPERTY_TIMESTAMP,
+    AccessRights = OPC_PROPERTY_ACCESS_RIGHTS,
+    ScanRate = OPC_PROPERTY_SCAN_RATE,
+    EuType = OPC_PROPERTY_EU_TYPE,
+    EuInfo = OPC_PROPERTY_EU_INFO,
+    EuUnits = OPC_PROPERTY_EU_UNITS,
+    Description = OPC_PROPERTY_DESCRIPTION,
+    HighEu = OPC_PROPERTY_HIGH_EU,
+    LoEu = OPC_PROPERTY_LOW_EU,
+    HighIr = OPC_PROPERTY_HIGH_IR,
+    LowIr = OPC_PROPERTY_LOW_IR,
+    CloseLabel = OPC_PROPERTY_CLOSE_LABEL,
+    OpenLabel = OPC_PROPERTY_OPEN_LABEL,
+    Timezone = OPC_PROPERTY_TIMEZONE,
+    ConditionStatus = OPC_PROPERTY_CONDITION_STATUS,
+    AlarmQuickHelp = OPC_PROPERTY_ALARM_QUICK_HELP,
+    AlarmAreaList = OPC_PROPERTY_ALARM_AREA_LIST,
+    PrimaryAlarmArea = OPC_PROPERTY_PRIMARY_ALARM_AREA,
+    ConditionLogic = OPC_PROPERTY_CONDITION_LOGIC,
+    LimitExceeded = OPC_PROPERTY_LIMIT_EXCEEDED,
+    DeadBand = OPC_PROPERTY_DEADBAND,
+    HihiLimit = OPC_PROPERTY_HIHI_LIMIT,
+    HiLimit = OPC_PROPERTY_HI_LIMIT,
+    LoLimit = OPC_PROPERTY_LO_LIMIT,
+    LoLoLimit = OPC_PROPERTY_LOLO_LIMIT,
+    ChangeRateLimit = OPC_PROPERTY_CHANGE_RATE_LIMIT,
+    DeviationLimit = OPC_PROPERTY_DEVIATION_LIMIT,
+    SoundFile = OPC_PROPERTY_SOUND_FILE,
+    TypeSystemId = OPC_PROPERTY_TYPE_SYSTEM_ID,
+    DictionaryId = OPC_PROPERTY_DICTIONARY_ID,
+    TypeId = OPC_PROPERTY_TYPE_ID,
+    Dictionary = OPC_PROPERTY_DICTIONARY,
+    TypeDictionary = OPC_PROPERTY_TYPE_DESCRIPTION,
+    ConsistencyWindow = OPC_PROPERTY_CONSISTENCY_WINDOW,
+    WriteBehavior = OPC_PROPERTY_WRITE_BEHAVIOR,
+    UnconvertedItemId = OPC_PROPERTY_UNCONVERTED_ITEM_ID,
+    UnfilteredItemId = OPC_PROPERTY_UNFILTERED_ITEM_ID,
+    DataFilterValue = OPC_PROPERTY_DATA_FILTER_VALUE
+};
+
 
 PYBIND11_MODULE(opcdaaehdaclient, m) {
 
@@ -314,6 +359,7 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
     py::class_<DaItemProperty>(m, "DaItemProperty", opcObject)
         .def(py::init<>())
         .def("GetId", &DaItemProperty::GetId)
+        //.def("GetName", static_cast<OpcDaPropertyName>(&DaItemProperty::GetId))
         .def("GetDescription", &DaItemProperty::GetDescription)
         .def("GetDataType", &DaItemProperty::GetDataType)
         .def("GetValue", &DaItemProperty::GetValue)

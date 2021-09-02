@@ -472,7 +472,7 @@ namespace Technosoftware
         {
             DaItem*  pItem;
             DWORD       i;
-
+            
             std::vector<DaItem*> items = std::vector<DaItem*>(dwCount);
             //OpcArray<DaItem*> items = OpcArray<DaItem*>(dwCount);
 
