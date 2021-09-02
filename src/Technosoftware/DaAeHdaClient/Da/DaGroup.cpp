@@ -20,6 +20,7 @@
 
 #include <vector>
 
+
 #include "OpcInternal.h"
 #include "DaAeHdaClient/Da/DaGroup.h"
 #include "DaGroupImpl.h"
@@ -28,6 +29,7 @@
 #include "DaAeHdaClient/Da/DaItem.h"
 
 #include "Base/Exception.h"
+
 
 namespace Technosoftware
 {
@@ -86,7 +88,9 @@ namespace Technosoftware
 
         Base::Status DaGroup::AddItems(DaItemDefinitions& itemDefinitions,
             vector<DaItem*>& items,
-            void(*errorHandler)(const DaItemDefinition& itemDefinitions, Base::Status status)) {
+            const std::function<void(const DaItemDefinition&, Base::Status)>& errorHandler
+                
+                ) {
             return impl_->AddItems(itemDefinitions, items, errorHandler);
         }
 
@@ -255,7 +259,7 @@ namespace Technosoftware
         //----------------------------------------------------------------------------------------------------------------------
         Technosoftware::Base::Status DaGroupImpl::AddItems(DaItemDefinitions& ItemDefs,
             vector<DaItem*>& arItems,
-            void(*pfnErrHandler)(const DaItemDefinition& ItemDef, Technosoftware::Base::Status res))
+            const std::function<void(const DaItemDefinition&, Base::Status)>& pfnErrHandler)
         {
             Technosoftware::Base::Status res;
             DaItem*  pItem = NULL;

@@ -32,6 +32,7 @@
  // INCLUDES
  //-----------------------------------------------------------------------------
 #include <iostream>
+#include <functional>
 #include <tchar.h> 
 #include <string>
 #include <vector>
@@ -129,10 +130,10 @@ void MyDataCallbackClass::DataChange(
 //-----------------------------------------------------------------------------
 // This handler is called for all items which cannot be added successfully.
 //-----------------------------------------------------------------------------
-void AddItemErrHandler(const Technosoftware::DaAeHdaClient::DaItemDefinition& itemDef, Technosoftware::Base::Status res)
+auto AddItemErrHandler = [](const Technosoftware::DaAeHdaClient::DaItemDefinition& itemDef, Technosoftware::Base::Status res)
 {
     cout << "   Cannot add item '" << itemDef.ItemIdentifier << "': " << res.ToString() << endl;
-}
+};
 
 
 //-----------------------------------------------------------------------------
