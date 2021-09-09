@@ -24,6 +24,7 @@
 #include <pybind11/complex.h>
 #include <pybind11/functional.h>
 #include <PythonCOM.h>
+#include <PyWinTypes.h>
 #include "Classic/inc32/opcda.h"
 #include "DaAeHdaClient/OpcClientSdk.h"
 
@@ -36,6 +37,9 @@ using namespace Technosoftware::DaAeHdaClient;
 // Converting from Python types to VARIANT
 // https://windowsquestions.com/2020/12/11/expressing-a-python-class-as-a-type-in-stdvariant-in-c-using-pybind11/
 //py::object Decimal = py::module_::import("decimal").attr("Decimal");
+
+
+
 
 
 
@@ -84,7 +88,6 @@ namespace pybind11 {
              * ignored by implicit casters.
              */
             static handle cast(VARIANT src, return_value_policy /* policy */, handle /* parent */) {
-
 
                 return PyCom_PyObjectFromVariant(&src);
             }

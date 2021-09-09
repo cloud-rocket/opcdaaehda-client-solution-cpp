@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>d1bc727f-f39e-4e84-a577-e4641bd50686</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PyDaConsole.py</StartupFile>
+    <StartupFile>PyDaBrowserConsole.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

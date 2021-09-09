@@ -61,10 +61,13 @@ def main():
             addedItems = DaItems()
             daItemDefinitions = DaItemDefinitions()
 
-            status = daItemDefinitions.Add("Random.Real8", 100)
-            if status.IsGood():
-                status = daItemDefinitions.Add("Random.Real4", 150)
+            #status = daItemDefinitions.Add("Random.Real8", 100)
+            status = daItemDefinitions.Add("Random.Int4", 100)
+            if status.IsNotGood():
+                    print(f"   Cannot add item definition to the item definition list: {status}")
+                    return 1
 
+            status = daItemDefinitions.Add("Random.Real4", 150)
             if status.IsNotGood():
                     print(f"   Cannot add item definition to the item definition list: {status}")
                     return 1
