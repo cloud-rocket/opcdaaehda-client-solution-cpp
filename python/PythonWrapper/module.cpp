@@ -27,6 +27,7 @@
 #include <PyWinTypes.h>
 #include "Classic/inc32/opcda.h"
 #include "DaAeHdaClient/OpcClientSdk.h"
+//#include "DaAeHdaClient/OpcUti.h"
 
 namespace py = pybind11;
 
@@ -262,6 +263,10 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .export_values();
 
 
+    // Functions
+    //m.def("QualityAsText", &Technosoftware::DaAeHdaClient::QualityAsText);
+
+
     // Objects
     py::class_<Status>(m, "Status", opcObject)
         .def(py::init<>())
@@ -318,21 +323,27 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
             py::arg("coInit") = 0)
         //.def_static("Connect", static_cast<Technosoftware::Base::Status(const std::string&, const std::string&, uint32_t coInit)> (&Technosoftware::DaAeHdaClient::DaServer::Connect))
         .def("Disconnect", &DaServer::Disconnect)
-        .def("UpdateStatus", &DaServer::UpdateStatus)
-        .def("RegisterClientName", &DaServer::RegisterClientName);
+        .def("UpdateStatus", &DaServer::UpdateStatus, "Retrieves new status information from the currently connected server.")
+        //.def("PollStatus", &DaServer::PollStatus, "Activates, inactivates or changes polling of the current server status. The callback has a user specified parameter value(Cookie).")
+        //.def("SetShutdownRequestSubscription", &DaServer::SetShutdownRequestSubscription, "Activates or inactivates a subscription to shutdown requests from the connected server.")
+        .def("RegisterClientName", &DaServer::RegisterClientName, 
+            "Registers the client name with the connected server.",
+            py::arg("sClientName"),
+            py::arg_v("fMachineNameAsPrefix", false, "(Optional) Optional parameter which specifies if the name of the local computer should be used as prefix.")
+            );
 
 
     py::class_<DaBrowseFilters>(m, "DaBrowseFilters", opcObject)
         .def(py::init<DaBrowseElementFilter, const string&, const string&, uint32_t, bool, bool, VARTYPE, uint32_t>(),
             R"pbdoc(Constructs a DaBrowseFilters object.)pbdoc", 
-            py::arg("browseElementFilter")=DaBrowseElementFilter::All,
-            py::arg("elementNameFilter")="",
-            py::arg("vendorFilter")="",
-            py::arg("maxElementsReturned")=0,
-            py::arg("returnAllProperties")=false,
-            py::arg("returnPropertyValues")=false,
-            py::arg("dataTypeFilter")=0, // VT_EMPTY
-            py::arg("accessRightsFilter")= OPC_READABLE + OPC_WRITEABLE
+            py::arg_v("browseElementFilter", DaBrowseElementFilter::All, "(Optional) Specifies which type of elements are returned."),
+            py::arg_v("elementNameFilter", "", "(Optional) Specifies the text string which will be used to filter the element names.This text string may contain wildcard characters that conforms to the LIKE operator from Visual Basic."),
+            py::arg_v("vendorFilter", "", "(Optional) Specifies the text string which will be used for vendor specific filtering. "),
+            py::arg_v("maxElementsReturned", 0, "(Optional) Specifies the maximum number of elements returned by the server.A value 0 turns this filter off."),
+            py::arg_v("returnAllProperties", false, "(Optional) Specifies if each returned single element contains all available properties."),
+            py::arg_v("returnPropertyValues", false, "(Optional) Specifies if the returned properties contains the property value too.This value is ignored if parameter returnAllProperties is false."),
+            py::arg_v("dataTypeFilter", 0, "(Optional) Specifies the data type filter. All elements which match this data type are returned.The data type VT_EMPTY turns this filter off."), // VT_EMPTY=0
+            py::arg_v("accessRightsFilter", OPC_READABLE + OPC_WRITEABLE, "(Optional) Specifies the access rights filter. All elements which match this access rights are returned. ")
         );
        
     py::class_<DaBrowseElement>(m, "DaBrowseElement", opcObject)

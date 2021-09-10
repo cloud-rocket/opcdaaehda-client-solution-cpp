@@ -145,14 +145,14 @@
       <RuntimeLibrary Condition="$(PythonCoreDVersion) == ''">MultiThreadedDebugDLL</RuntimeLibrary>
       <SDLCheck>true</SDLCheck>
       <SupportJustMyCode>false</SupportJustMyCode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(PythonHome)Include;$(PythonHome)Lib\site-packages\pybind11\include;$(PythonHome)Lib\site-packages\win32\include;$(PythonHome)Lib\site-packages\win32com\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)src\Technosoftware;$(PythonHome)Include;$(PythonHome)Lib\site-packages\pybind11\include;$(PythonHome)Lib\site-packages\win32\include;$(PythonHome)Lib\site-packages\win32com\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(PythonHome)libs;$(PythonHome)\Lib\site-packages\win32\libs;$(PythonHome)\Lib\site-packages\win32com\libs;$(SolutionDir)$(Platform)\$(PlatformToolset)\$(Configuration)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>TechnosoftwareDaAeHdaClient.lib;OleAut32.lib</AdditionalDependencies>
+      <AdditionalDependencies>TechnosoftwareDaAeHdaClient.lib</AdditionalDependencies>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
     </Link>
   </ItemDefinitionGroup>
@@ -182,7 +182,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>Multithreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(PythonHome)Include;$(PythonHome)Lib\site-packages\pybind11\include;$(PythonHome)Lib\site-packages\win32\include;$(PythonHome)Lib\site-packages\win32com\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)src\Technosoftware;$(PythonHome)Include;$(PythonHome)Lib\site-packages\pybind11\include;$(PythonHome)Lib\site-packages\win32\include;$(PythonHome)Lib\site-packages\win32com\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <SDLCheck>true</SDLCheck>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
@@ -192,12 +192,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>TechnosoftwareDaAeHdaClient.lib;OleAut32.lib</AdditionalDependencies>
+      <AdditionalDependencies>TechnosoftwareDaAeHdaClient.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(PythonHome)libs;$(PythonHome)\Lib\site-packages\win32\libs;$(PythonHome)\Lib\site-packages\win32com\libs;$(SolutionDir)$(Platform)\$(PlatformToolset)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="converters.cpp" />
     <ClCompile Include="module.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -208,9 +207,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="requirements.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="converters.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
