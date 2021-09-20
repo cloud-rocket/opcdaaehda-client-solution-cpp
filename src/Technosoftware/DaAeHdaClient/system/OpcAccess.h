@@ -168,6 +168,10 @@ namespace Technosoftware
 
             void           DisconnectFromEventServer();
 
+
+            vector<string> GetOPCServers(LPCTSTR  szMachineName, DWORD dwCoInit = COINIT_MULTITHREADED);
+
+
             //
             // Historical Server Functions
             //
