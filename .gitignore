@@ -246,3 +246,5 @@ OPC\ Foundation/
 /Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 /SampleApplications/Samples/OPCOutput
 !**/Assets/*.*
+/python/PythonWrapper/build/lib.win-amd64-3.8/opcdaaehdaclient.cp38-win_amd64.pyd
+/python/PythonWrapper/opcdaaehdaclient.egg-info

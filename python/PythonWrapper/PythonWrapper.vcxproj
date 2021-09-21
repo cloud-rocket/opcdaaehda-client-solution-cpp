@@ -200,7 +200,6 @@
     <ClCompile Include="module.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build-dev.bat" />
     <None Include="pyproject.toml" />
     <None Include="README.md" />
     <None Include="setup.py" />

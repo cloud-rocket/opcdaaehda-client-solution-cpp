@@ -263,6 +263,61 @@ PYBIND11_MODULE(opcdaaehdaclient, m) {
         .export_values();
 
 
+
+    // Exceptions
+    py::register_exception<LogicException>(m, "LogicException", PyExc_Exception);
+    py::register_exception<AssertionViolationException>(m, "AssertionViolationException");
+    py::register_exception<NullPointerException>(m, "NullPointerException");
+    py::register_exception<NullValueException>(m, "NullValueException");
+    py::register_exception<BugcheckException>(m, "BugcheckException");
+    py::register_exception<InvalidArgumentException>(m, "InvalidArgumentException");
+    py::register_exception<NotImplementedException>(m, "NotImplementedException");
+    py::register_exception<RangeException>(m, "RangeException");
+    py::register_exception<IllegalStateException>(m, "IllegalStateException");
+    py::register_exception<InvalidAccessException>(m, "InvalidAccessException");
+    py::register_exception<SignalException>(m, "SignalException");
+    py::register_exception<UnhandledException>(m, "UnhandledException");
+
+    py::register_exception<RuntimeException>(m, "RuntimeException", PyExc_Exception);
+    py::register_exception<NotFoundException>(m, "NotFoundException");
+    py::register_exception<ExistsException>(m, "ExistsException");
+    py::register_exception<TimeoutException>(m, "TimeoutException");
+    py::register_exception<SystemException>(m, "SystemException");
+    py::register_exception<RegularExpressionException>(m, "RegularExpressionException");
+    py::register_exception<LibraryLoadException>(m, "LibraryLoadException");
+    py::register_exception<LibraryAlreadyLoadedException>(m, "LibraryAlreadyLoadedException");
+    py::register_exception<NoThreadAvailableException>(m, "NoThreadAvailableException");
+    py::register_exception<PropertyNotSupportedException>(m, "PropertyNotSupportedException");
+    py::register_exception<PoolOverflowException>(m, "PoolOverflowException");
+    py::register_exception<NoPermissionException>(m, "NoPermissionException");
+    py::register_exception<OutOfMemoryException>(m, "OutOfMemoryException");
+    py::register_exception<DataException>(m, "DataException");
+
+    py::register_exception<DataFormatException>(m, "DataFormatException");
+    py::register_exception<SyntaxException>(m, "SyntaxException");
+    py::register_exception<CircularReferenceException>(m, "CircularReferenceException");
+    py::register_exception<PathSyntaxException>(m, "PathSyntaxException");
+    py::register_exception<IOException>(m, "IOException");
+    py::register_exception<ProtocolException>(m, "ProtocolException");
+    py::register_exception<FileException>(m, "FileException");
+    py::register_exception<FileExistsException>(m, "FileExistsException");
+    py::register_exception<FileNotFoundException>(m, "FileNotFoundException");
+    py::register_exception<PathNotFoundException>(m, "PathNotFoundException");
+    py::register_exception<FileReadOnlyException>(m, "FileReadOnlyException");
+    py::register_exception<FileAccessDeniedException>(m, "FileAccessDeniedException");
+    py::register_exception<CreateFileException>(m, "CreateFileException");
+    py::register_exception<OpenFileException>(m, "OpenFileException");
+    py::register_exception<WriteFileException>(m, "WriteFileException");
+    py::register_exception<ReadFileException>(m, "ReadFileException");
+    py::register_exception<DirectoryNotEmptyException>(m, "DirectoryNotEmptyException");
+    py::register_exception<UnknownURISchemeException>(m, "UnknownURISchemeException");
+    py::register_exception<TooManyURIRedirectsException>(m, "TooManyURIRedirectsException");
+    py::register_exception<URISyntaxException>(m, "URISyntaxException");
+    py::register_exception<ApplicationException>(m, "ApplicationException");
+    py::register_exception<BadCastException>(m, "BadCastException");    
+    
+    py::register_exception<StatusException>(m, "StatusException", PyExc_Exception);
+
     // Functions
     //m.def("QualityAsText", &Technosoftware::DaAeHdaClient::QualityAsText);
 
