@@ -298,12 +298,13 @@ namespace Technosoftware
                 for (i = 0; i < dwCount; i++) {
                     // Restore the client item handles
                     auto result = m_cItems.find(ItemDefs.parItemDefs_->m_aT[i].hClient);
-                    if (result != m_cItems.end()) {
-                        pItem = result->second;
-                    }
-                    else {
+                    if (result == m_cItems.end()) {
                         cout << "Element not found." << endl;
+                        continue;
                     }
+
+                    pItem = result->second;
+
                     //pItem = (DaItem*)ItemDefs.parItemDefs_->m_aT[i].clientHandle_;
                     ItemDefs.parItemDefs_->m_aT[i].hClient = pItem->clientHandle_;
 
@@ -605,7 +606,7 @@ namespace Technosoftware
                 OPCITEMSTATE*  pItemState = NULL;
 
                 phServer = new OPCHANDLE[dwCount];
-                if (!phServer) Technosoftware::Base::OutOfMemoryException();
+                if (!phServer) throw Technosoftware::Base::OutOfMemoryException();
 
                 for (i = 0; i < dwCount; i++) {
                     phServer[i] = arItems[i]->GetServerHandle();
@@ -659,10 +660,10 @@ namespace Technosoftware
 
                 // Create an array with shallow copies of the values to be written.
                 pValues = new VARIANT[dwCount];
-                if (!pValues) Technosoftware::Base::OutOfMemoryException();
+                if (!pValues) throw Technosoftware::Base::OutOfMemoryException();
 
                 phServer = new OPCHANDLE[dwCount];
-                if (!phServer) Technosoftware::Base::OutOfMemoryException();
+                if (!phServer) throw Technosoftware::Base::OutOfMemoryException();
 
                 for (i = 0; i < dwCount; i++) {
                     memcpy(&pValues[i], &arItems[i]->writeValue_, sizeof(VARIANT));    // Shallow Copy
